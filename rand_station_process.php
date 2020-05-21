@@ -7,12 +7,20 @@ $link = connect_db();
 
 $stations_data = get_station_table($link);
 $number_stations = count($stations_data);
-$rand_number = mt_rand(1, $number_stations) - 1;
-var_dump($stations_data);
-var_dump($number_stations);
-var_dump($rand_number);
-var_dump($stations_data[$rand_number]);
-var_dump($stations_data[$rand_number]['station_name']);
+$rand_station_number = mt_rand(1, $number_stations) - 1;
+
+var_dump($stations_data[$rand_station_number]);
+var_dump($stations_data[$rand_station_number]['station_name']);
+$station_id = $stations_data[$rand_station_number]['station_id'];
+$spot_data = get_spot_table($link, $station_id);
+$number_spots = count($spot_data);
+$rand_spot_number = mt_rand(1, $number_spots) - 1;
+
+var_dump($spot_data);
+var_dump($number_spots);
+var_dump($rand_spot_number);
+var_dump($spot_data[$rand_spot_number]['lat']);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">

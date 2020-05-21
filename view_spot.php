@@ -7,7 +7,12 @@ $link = connect_db();
 
 $stations_data = get_station_table($link);
 $number_stations = count($stations_data);
-$rand_number = mt_rand(1, $number_stations) - 1;
+$rand_station_number = mt_rand(1, $number_stations) - 1;
+$station_id = $stations_data[$rand_station_number]['station_id'];
+
+$spot_data = get_spot_table($link, $station_id);
+$number_spots = count($spot_data);
+$rand_spot_number = mt_rand(1, $number_spots) - 1;
 
 close_db($link);
 ?>
@@ -23,7 +28,7 @@ close_db($link);
     <div id="main">
         <div id="left">
             <div id="spot_name_box">
-                <h1 class="spot_name"><?php print h($stations_data[$rand_number]['station_name']); ?></h1>
+                <h1 class="spot_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
             </div>
             <div id="map_box"></div>
         </div>
@@ -33,28 +38,29 @@ close_db($link);
                 <div class="spot_info_comment_box">
                     <p class="spot_info"></p>
                 </div>
+                <div class="button_box">
+                    <form action="view_spot.php" method="post">
+                        <input type="submit" value="選び直す">
+                    </form>
+                    <form action="top_page.php" method="post">
+                        <input type="submit" value="TOPに戻る">
+                    </form>
+                </div>
             </div>
         </div>
+        
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
     <script>
         function init(){
-            var tokyo = {
-                lat: 35.6812362, //緯度
-                lng: 139.7649361 //経度
-            };
-            var midtown_hibiya = {
-                lat: 35.6736004, //緯度
-                lng: 139.756956 //経度
-            };
-            var kitte = {
-                lat: 35.6797978,
-                lng: 139.7626837
-            };
             var random_station = {
-                lat: <?php print h($stations_data[$rand_number]['lat']); ?>,
-                lng: <?php print h($stations_data[$rand_number]['lng']); ?>
+                lat: <?php print h($stations_data[$rand_station_number]['lat']); ?>,
+                lng: <?php print h($stations_data[$rand_station_number]['lng']); ?>
+            };
+            var random_spot = {
+                lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
+                lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
             };
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];
@@ -76,7 +82,7 @@ close_db($link);
             });
             var infoWindow = new google.maps.InfoWindow({
                 // position: shinagawa,
-                content: '<a href=""><?php print h($stations_data[$rand_number]['station_name']); ?></a>'
+                content: '<a href=""><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
             });
             infoWindow.open(map, marker); 
             // $('marker').click(function(e){
@@ -88,9 +94,9 @@ close_db($link);
                 // $('.spot_info').html('東京駅');
             });
             //追加マーカーは関数化？
-            var marker2 = new google.maps.Marker({
+            var spot1 = new google.maps.Marker({
                 map: map,
-                position: location2,
+                position: random_spot,
                 // title: '東京ミッドタウン日比谷', // マウスオーバー時に表示。
                 icon: {
                     url: './icon/icon.png',
@@ -99,34 +105,35 @@ close_db($link);
                 // animation: google.maps.Animation.BOUNCE
             });
             var infoWindow = new google.maps.InfoWindow({
-                content: '<a href="">東京ミッドタウン</a>'
+                content: '<a href=""><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
             });
-            infoWindow.open(map, marker2); 
-            marker2.addListener('click', function(e){
-                // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="spot_picture/800px-Tokyo_Midtown.2.jpeg" alt="東京ミッドタウン" title="東京ミッドタウン">');
-                $('.spot_info').html('東京ミッドタウン');
-            });
-            
-            var marker3 = new google.maps.Marker({
-                map: map,
-                position: location3,
-                // title: 'KITTE', // マウスオーバー時に表示。
-                icon: {
-                    url: './icon/icon.png',
-                    scaledSize: new google.maps.Size(40, 60)
-                }
-                // animation: google.maps.Animation.BOUNCE
-            });
-            var infoWindow = new google.maps.InfoWindow({
-                content: '<a href="">KITTE</a>'
-            });
-            infoWindow.open(map, marker3); 
-            marker3.addListener('click', function(e){
+            infoWindow.open(map, spot1); 
+            spot1.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
-                $('.spot_info').html('KITTE');
+                $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
             });
+            
+            // var marker3 = new google.maps.Marker({
+            //     map: map,
+            //     position: location3,
+            //     // title: 'KITTE', // マウスオーバー時に表示。
+            //     icon: {
+            //         url: './icon/icon.png',
+            //         scaledSize: new google.maps.Size(40, 60)
+            //     }
+            //     // animation: google.maps.Animation.BOUNCE
+            // });
+            // var infoWindow = new google.maps.InfoWindow({
+            //     content: '<a href="">KITTE</a>'
+            // });
+            // infoWindow.open(map, marker3); 
+            // marker3.addListener('click', function(e){
+                // ここにメッセージと画像を表示させる処理
+                // $('.spot_picture').html('<img class="pic_size" src="spot_picture/800px-Tokyo_Midtown.2.jpeg" alt="東京ミッドタウン" title="東京ミッドタウン">');
+                // $('.spot_picture').html('<img class="pic_size" src="spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
+                // $('.spot_info').html('KITTE');
+            // });
         }
     </script>
 </body>
