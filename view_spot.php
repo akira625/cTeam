@@ -2,6 +2,14 @@
 require_once '../api/include/conf/const.php';
 require_once '../api/include/model/my_function.php';
 require_once '../api/include/model/cteam_function.php';
+
+$link = connect_db();
+
+$stations_data = get_station_table($link);
+$number_stations = count($stations_data);
+$rand_number = mt_rand(1, $number_stations) - 1;
+
+close_db($link);
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +23,7 @@ require_once '../api/include/model/cteam_function.php';
     <div id="main">
         <div id="left">
             <div id="spot_name_box">
-                <h1 class="spot_name">東京駅</h1>
+                <h1 class="spot_name"><?php print h($stations_data[$rand_number]['station_name']); ?></h1>
             </div>
             <div id="map_box"></div>
         </div>
@@ -44,17 +52,17 @@ require_once '../api/include/model/cteam_function.php';
                 lat: 35.6797978,
                 lng: 139.7626837
             };
-            //locationに今示したい場所を代入
-            var location = tokyo;
-            var location2 = midtown_hibiya;
-            var location3 = kitte;
+            var random_station = {
+                lat: <?php print h($stations_data[$rand_number]['lat']); ?>,
+                lng: <?php print h($stations_data[$rand_number]['lng']); ?>
+            };
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];
             var map = new google.maps.Map(
                 map_box, // 第１引数は上で取得したマップ表示対象のdiv要素。
                 {
                     // 第２引数で各種オプションを設定
-                    center: location, 
+                    center: random_station, 
                     zoom: 15, // 地図の拡大のレベルを15に。（1 - 18くらい）
                     disableDefaultUI: true, // 各種UI(航空写真、ストリートビューなど)をOFFに
                     zoomControl: true, // 拡大縮小だけできるように
@@ -64,11 +72,11 @@ require_once '../api/include/model/cteam_function.php';
             );
             var marker = new google.maps.Marker({
                 map: map,
-                position: location,
+                position: random_station,
             });
             var infoWindow = new google.maps.InfoWindow({
                 // position: shinagawa,
-                content: '<a href="">東京駅</a>'
+                content: '<a href=""><?php print h($stations_data[$rand_number]['station_name']); ?></a>'
             });
             infoWindow.open(map, marker); 
             // $('marker').click(function(e){

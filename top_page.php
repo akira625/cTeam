@@ -7,7 +7,7 @@
     <title>トップページ</title>
 </head>
 <body>
-    <form action="rand_station_process.php" method="post">
+    <form action="view_spot.php" method="post">
         <input type="submit" value="駅を決める">
     </form>
     <a href="リンク先のＵＲＬ">管理者の方はこちら</a>
