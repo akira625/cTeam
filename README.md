@@ -1,4 +1,4 @@
-#　行き先ポン
+ #　行き先ポン
 
 このリポジトリではCチームの行き先ぽんを開発します。
 
@@ -11,3 +11,5 @@ wisdom
 じょうきみ
 
 tsukudatomoki
+
+manatakeuchi
