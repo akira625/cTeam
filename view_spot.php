@@ -1,5 +1,5 @@
 <?php
-require_once '../api/include/conf/wisdom_const.php';
+require_once '../api/include/conf/const.php';
 require_once '../api/include/model/my_function.php';
 require_once '../api/include/model/cteam_function.php';
 ?>
