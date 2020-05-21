@@ -1,0 +1,55 @@
+#main {
+    width: 1000px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #c0c0c0;
+}
+#left {
+    width: 700px;
+    height: 700px;
+}
+#right {
+    width: 300px;
+    height: 700px;
+}
+
+#spot_name_box {
+    width: 600px;
+    height: 100px;
+    margin: 50px;
+    margin-top: 25px;
+    background-color: #f0f8ff;
+}
+#map_box {
+    width: 600px;
+    height: 500px;
+    margin: 50px;
+    background-color: #008b8b;
+}
+#spot_info_box {
+    width: 250px;
+    height: 650px;
+    margin-top: 25px;
+    margin-left: 0px;
+    margin-right: 50px;
+    background-color: #ffffe0;
+}
+.spot_picture {
+    width: 200px;
+    height: 200px;
+    margin: 5px 25px;
+    background-color: #ff69b4;
+}
+.spot_info_comment_box {
+    width: 200px;
+    height: 400px;
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-color: #ffa500;
+}
+.pic_size {
+    width: 200px;
+    height: 200px;
+}
