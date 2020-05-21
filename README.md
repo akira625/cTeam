@@ -5,3 +5,7 @@
 sarutashiori
 
 wisdom
+
+アース
+
+じょうきみ
