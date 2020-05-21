@@ -9,3 +9,5 @@ wisdom
 アース
 
 じょうきみ
+
+tsukudatomoki
