@@ -1,8 +1,7 @@
 <?php
-require_once '../include/conf/wisdom_const.php';
-require_once '../include/model/my_function.php';
-require_once '../include/model/cteam_function.php';
-
+require_once '../api/include/conf/wisdom_const.php';
+require_once '../api/include/model/my_function.php';
+require_once '../api/include/model/cteam_function.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +16,6 @@ require_once '../include/model/cteam_function.php';
         <div id="left">
             <div id="spot_name_box">
                 <h1 class="spot_name">東京駅</h1>
-                <!--<h1 class="spot_name"><?php h($station[station_name]); ?></h1>-->
             </div>
             <div id="map_box"></div>
         </div>
@@ -87,7 +85,7 @@ require_once '../include/model/cteam_function.php';
                 position: location2,
                 // title: '東京ミッドタウン日比谷', // マウスオーバー時に表示。
                 icon: {
-                    url: '../icon/icon.png',
+                    url: './icon/icon.png',
                     scaledSize: new google.maps.Size(40, 60)
                 }
                 // animation: google.maps.Animation.BOUNCE
@@ -98,7 +96,7 @@ require_once '../include/model/cteam_function.php';
             infoWindow.open(map, marker2); 
             marker2.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="../spot_picture/800px-Tokyo_Midtown.2.jpeg" alt="東京ミッドタウン" title="東京ミッドタウン">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/800px-Tokyo_Midtown.2.jpeg" alt="東京ミッドタウン" title="東京ミッドタウン">');
                 $('.spot_info').html('東京ミッドタウン');
             });
             
@@ -107,7 +105,7 @@ require_once '../include/model/cteam_function.php';
                 position: location3,
                 // title: 'KITTE', // マウスオーバー時に表示。
                 icon: {
-                    url: '../icon/icon.png',
+                    url: './icon/icon.png',
                     scaledSize: new google.maps.Size(40, 60)
                 }
                 // animation: google.maps.Animation.BOUNCE
@@ -118,13 +116,10 @@ require_once '../include/model/cteam_function.php';
             infoWindow.open(map, marker3); 
             marker3.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="../spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
                 $('.spot_info').html('KITTE');
             });
         }
-        $(function () {
-            init();
-        });
     </script>
 </body>
 </html>
