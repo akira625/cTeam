@@ -3,3 +3,5 @@
 このリポジトリではCチームの行き先ぽんを開発します。
 
 sarutashiori
+
+wisdom
