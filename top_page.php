@@ -9,10 +9,25 @@
         
     </style>
 </head>
+<link type = "text/css" rel = "stylesheet" href = "common.css">
 <body>
-    <form action="view_spot.php" method="post">
-        <input type="submit" value="駅を決める">
-    </form>
-    <a href="login.php">管理者の方はこちら</a>
+    <header>
+        <div class = "header-box">
+            <a href = "./top.php">
+                <img class = "logo" src="./header-img/logo.png">
+            </a>
+            <a href = "./top.php">
+                <img class = "walk" src="./header-img/walk.png">
+            </a>
+        </div>
+    </header>
+    <div class="start content">
+        <form action="view_spot.php" method="post" class="start-box">
+        <img class = "frame" src="./header-img/frame.png">
+        <input type="submit" class="btn-square-so-pop" value="駅を決める">
+        </form>
+        <br>
+        <a href="login.php" class="for-admin">管理者ページリンク</a>
+    </div>
 </body>
 </html>

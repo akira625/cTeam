@@ -1,4 +1,6 @@
 <?php
+//DELETE FROM ec_goods_table; ALTER TABLE ec_goods_table AUTO_INCREMENT=1;
+
 require_once './include/conf/const.php';
 require_once './include/model/functions.php';
 

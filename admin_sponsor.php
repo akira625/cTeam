@@ -1,8 +1,8 @@
 <?php
 //DELETE FROM ec_goods_table; ALTER TABLE ec_goods_table AUTO_INCREMENT=1;
 
-require_once './include/conf/const.php';
-require_once './include/model/functions.php';
+require_once './conf/const.php';
+require_once './model/functions.php';
 
 session_start();
 if(isset($_SESSION['user_id']) === TRUE) {
@@ -35,7 +35,7 @@ if($sql_kind === 'insert'){
     //エラーチェック
     //
 
-        if($station_name === ''){
+    if($station_name === ''){
         $errors[] = '駅名を入力してください。';
     }
     
@@ -104,5 +104,5 @@ $stations = select_stations($link);;
 
 close_db_connect($link);
 
-include_once './include/view/admin_station.php';
+include_once './view/admin_station.php';
 // include_once '../include/view/goods_management.php';

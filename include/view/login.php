@@ -23,7 +23,7 @@
                 <input type="text" name="user_name" placeholder="ユーザー名">
             </div>
             <div>
-                <input type="password" name="passwd" placeholder="パスワード">
+                <input type="password" name="password" placeholder="パスワード">
             </div>
             <input type = "submit" value = "ログイン">
             <?php if(count($errors) !== 0){?>
