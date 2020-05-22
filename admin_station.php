@@ -32,28 +32,27 @@ if($sql_kind === 'insert'){
     //
     //エラーチェック
     //
-    
-    if(get_post('submit')){
-            if($station_name === ''){
-            $errors[] = '駅名を入力してください。';
-        }
-        
-        if($address === ''){
-            $errors[] = '住所を選択してください。';
-        }
-        
-        if($lat === ''){
-            $errors[] = '緯度を入力してください';
-        }else if(lat_check($lat) !== 1){
-            $errors[] = '緯度に不正な値が入力されています。';
-        }
-    
-        if($lng === ''){
-            $errors[] = '経度を入力してください';
-        }else if(lng_check($lng) !== 1){
-            $errors[] = '経度に不正な値が入力されています。';
-        }
+
+        if($station_name === ''){
+        $errors[] = '駅名を入力してください。';
     }
+    
+    if($address === ''){
+        $errors[] = '住所を選択してください。';
+    }
+    
+    if($lat === ''){
+        $errors[] = '緯度を入力してください';
+    }else if(lat_check($lat) !== 1){
+        $errors[] = '緯度に不正な値が入力されています。';
+    }
+
+    if($lng === ''){
+        $errors[] = '経度を入力してください';
+    }else if(lng_check($lng) !== 1){
+        $errors[] = '経度に不正な値が入力されています。';
+    }
+    
 }
 
 if($sql_kind === 'delete'){
@@ -79,15 +78,14 @@ if(is_post() === TRUE && count($errors) === 0){
         
         start_transaction($link);
         
-        if(get_post('submit')){
-            if(insert_stations($link, $station_name, $lat, $lng, $address) === TRUE){
-                $message = 'スポットを追加しました。';
-            }else{
-                $errors[] = '追加失敗.station_table';
-            }
+        if(insert_stations($link, $station_name, $lat, $lng, $address) === TRUE){
+            $message = 'スポットを追加しました。';
+        }else{
+            $errors[] = '追加失敗.station_table';
         }
+        
     }
-    
+
     if($sql_kind === 'delete'){
         if(delete_station($link, $station_id) === TRUE){
             $message = 'データを削除しました。';
