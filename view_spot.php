@@ -48,7 +48,6 @@ close_db($link);
                 </div>
             </div>
         </div>
-        
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
@@ -110,7 +109,7 @@ close_db($link);
             infoWindow.open(map, spot1); 
             spot1.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
             });
             
