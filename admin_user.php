@@ -1,10 +1,10 @@
 <?php
+require_once './include/conf/const.php';
+require_once './include/model/functions.php';
 
 $message = '';
 $errors = [];
 
-require_once './conf/const.php';
-require_once './model/functions.php';
 
 session_start();
 if(isset($_SESSION['user_id']) === TRUE) {
@@ -32,4 +32,4 @@ if(is_post() === TRUE && count($errors) === 0){
 close_db_connect($link);
 // var_dump($errors);
 
-include_once './view/admin_user.php';
+include_once './include/view/admin_user.php';

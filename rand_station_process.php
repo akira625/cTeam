@@ -1,7 +1,7 @@
 <?php
-require_once '../api/include/conf/const.php';
-require_once '../api/include/model/my_function.php';
-require_once '../api/include/model/cteam_function.php';
+require_once './include/conf/const.php';
+require_once './include/model/my_function.php';
+require_once './include/model/cteam_function.php';
 
 $link = connect_db();
 

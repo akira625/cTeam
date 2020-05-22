@@ -1,6 +1,6 @@
 <?php
-require_once './conf/const.php';
-require_once './model/functions.php';
+require_once './include/conf/const.php';
+require_once './include/model/functions.php';
 
 if (is_post() === false) {
    // POSTでなければログインページへリダイレクト

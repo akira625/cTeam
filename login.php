@@ -1,6 +1,6 @@
 <?php
-require_once './conf/const.php';
-require_once './model/functions.php';
+require_once './include/conf/const.php';
+require_once './include/model/functions.php';
 
 session_start();
 
@@ -17,4 +17,4 @@ if (isset($_SESSION['login_error']) === TRUE) {
     unset($_SESSION['login_error']);
 }
 
-include_once './view/login.php';
+include_once './include/view/login.php';

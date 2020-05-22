@@ -1,8 +1,6 @@
 <?php
-//DELETE FROM ec_goods_table; ALTER TABLE ec_goods_table AUTO_INCREMENT=1;
-
-require_once './conf/const.php';
-require_once './model/functions.php';
+require_once './include/conf/const.php';
+require_once './include/model/functions.php';
 
 session_start();
 if(isset($_SESSION['user_id']) === TRUE) {
@@ -184,5 +182,5 @@ $spots = select_spots($link);;
 
 close_db_connect($link);
 
-include_once './view/admin_spot.php';
+include_once './include/view/admin_spot.php';
 // include_once '../include/view/goods_management.php';
