@@ -100,7 +100,7 @@ close_db($link);
             });
             var infoWindow = new google.maps.InfoWindow({
                 // position: shinagawa,
-                content: '<a href=""><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
+                content: '<a href="http://www.google.co.jp/search?q=<?php print h($stations_data[$rand_station_number]['station_name']); ?>"><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
             });
             infoWindow.open(map, marker); 
             // $('marker').click(function(e){
@@ -123,7 +123,7 @@ close_db($link);
                 // animation: google.maps.Animation.BOUNCE
             });
             var infoWindow = new google.maps.InfoWindow({
-                content: '<a href=""><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
+                content: '<a href="http://www.google.co.jp/search?q=<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>"><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
             });
             infoWindow.open(map, spot1); 
             spot1.addListener('click', function(e){
