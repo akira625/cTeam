@@ -6,7 +6,7 @@ function h($str) {
 
 function get_db_connect() {
     // コネクション取得
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWD, DB_NAME);
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     if ($link === false) {
         die('error: ' . mysqli_connect_error());
     }
