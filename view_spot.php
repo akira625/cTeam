@@ -28,7 +28,8 @@ close_db($link);
     <div id="main">
         <div id="left">
             <div id="spot_name_box">
-                <h1 class="spot_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
+                <h1 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
+                <h2 class="spot_name"></h2>
             </div>
             <div id="map_box"></div>
         </div>
@@ -111,6 +112,8 @@ close_db($link);
                 // ここにメッセージと画像を表示させる処理
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
+                $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+                
             });
             
             // var marker3 = new google.maps.Marker({
