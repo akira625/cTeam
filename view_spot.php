@@ -75,6 +75,11 @@ close_db($link);
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
             };
+            $(function() {
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
+                $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
+                $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+            });
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];
             var map = new google.maps.Map(
