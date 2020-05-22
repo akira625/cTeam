@@ -23,6 +23,7 @@ $sql = "SELECT
             users_table
         WHERE
             user_name = '{$user_name}' AND password = '{$password}'";
+            var_dump($sql);
 $user = get_as_row($link, $sql);
 
 close_db_connect($link);
