@@ -13,6 +13,7 @@ define('DB_PASSWORD', 'codecamp34612');    // MySQLのパスワード
 define('DB_NAME',   'codecamp34612');    // データベース名
 >>>>>>> 0bcb6b16fa7f65134147a283ccd0d376ae9884bd
 
+
 define('HTML_CHARACTER_SET', 'UTF-8');  // HTML文字エンコーディング
 define('DB_CHARACTER_SET',   'UTF8');   // DB文字エンコーディング
 
