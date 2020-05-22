@@ -25,7 +25,7 @@
     width: 600px;
     height: 500px;
     margin: 50px;
-    background-color: #8484ff;
+    background-color: #008b8b;
 }
 #spot_info_box {
     width: 250px;
@@ -39,11 +39,13 @@
     width: 200px;
     height: 200px;
     margin: 5px 25px;
-    background-color: #ffadff;
 }
 .pic_size {
     width: 200px;
     height: 200px;
+}
+.spot_info {
+    padding: 20px;
 }
 .spot_info_comment_box {
     width: 200px;
@@ -55,9 +57,6 @@
 }
 
 .button_box {
-    width: 200px;
-    height: 20px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
 }

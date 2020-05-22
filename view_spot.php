@@ -87,7 +87,7 @@ close_db($link);
                 {
                     // 第２引数で各種オプションを設定
                     center: random_station, 
-                    zoom: 15, // 地図の拡大のレベルを15に。（1 - 18くらい）
+                    zoom: 15.5, // 地図の拡大のレベルを15に。（1 - 18くらい）
                     disableDefaultUI: true, // 各種UI(航空写真、ストリートビューなど)をOFFに
                     zoomControl: true, // 拡大縮小だけできるように
                     clickableIcons: false, // クリック関連の機能をoffに。
