@@ -22,30 +22,43 @@ close_db($link);
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="view_spot.css">
+    <link rel="stylesheet" href="common.css">
     <title>スポット表示</title>
 </head>
 <body>
-    <div id="main">
-        <div id="left">
-            <div id="spot_name_box">
-                <h1 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
-                <h2 class="spot_name"></h2>
-            </div>
-            <div id="map_box"></div>
+    <header>
+        <div class = "header-box">
+            <a href = "./top_page.php">
+                <img class = "logo" src="./header-img/logo.png">
+            </a>
+            <a href = "./top_page.php">
+                <img class = "walk" src="./header-img/walk.png">
+            </a>
         </div>
-        <div id="right">
-            <div id="spot_info_box">
-                <div class="spot_picture"></div>
-                <div class="spot_info_comment_box">
-                    <p class="spot_info"></p>
+    </header>
+    <div class="content">
+        <div id="main">
+            <div id="left">
+                <div id="spot_name_box">
+                    <h1 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
+                    <h2 class="spot_name"></h2>
                 </div>
-                <div class="button_box">
-                    <form action="view_spot.php" method="post">
-                        <input type="submit" value="選び直す">
-                    </form>
-                    <form action="top_page.php" method="post">
-                        <input type="submit" value="TOPに戻る">
-                    </form>
+                <div id="map_box"></div>
+            </div>
+            <div id="right">
+                <div id="spot_info_box">
+                    <div class="spot_picture"></div>
+                    <div class="spot_info_comment_box">
+                        <p class="spot_info"></p>
+                    </div>
+                    <div class="button_box">
+                        <form action="view_spot.php" method="post">
+                            <input type="submit" value="選び直す">
+                        </form>
+                        <form action="top_page.php" method="post">
+                            <input type="submit" value="TOPに戻る">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

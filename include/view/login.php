@@ -8,10 +8,10 @@
 <body>
     <header>
         <div class = "header-box">
-            <a href = "./top.php">
+            <a href = "./top_page.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
-            <a href = "./top.php">
+            <a href = "./top_page.php">
                 <img class = "walk" src="./header-img/walk.png">
             </a>
         </div>

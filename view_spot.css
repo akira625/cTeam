@@ -25,7 +25,7 @@
     width: 600px;
     height: 500px;
     margin: 50px;
-    background-color: #008b8b;
+    background-color: #8484ff;
 }
 #spot_info_box {
     width: 250px;
@@ -39,7 +39,7 @@
     width: 200px;
     height: 200px;
     margin: 5px 25px;
-    background-color: #ff69b4;
+    background-color: #ffadff;
 }
 .pic_size {
     width: 200px;
@@ -51,7 +51,7 @@
     margin-top: 10px;
     margin-left: 25px;
     margin-right: 25px;
-    background-color: #ffa500;
+    background-color: #ffffa8;
 }
 
 .button_box {
