@@ -1,0 +1,46 @@
+h1,h2{
+   margin: 0px;
+   padding-top: 21.44px;
+   padding-bottom: 21.44px;
+}
+form{
+   margin: 0px;
+   padding-bottom: 21.44px;
+}
+.add{
+   border-top: black 1px solid;
+   border-bottom: black 1px solid;
+}
+.add2{
+   border-top: black 1px solid;
+}
+table,td,th{
+   border: solid 1px black;
+}
+img{
+   width: 200px
+}
+.status_false{
+   background-color: gray;
+}
+.err-msg{
+   color: #FF0000;
+}
+
+.comment{
+   width: 300px;
+   height: 100px;
+}
+
+.update_comment{
+   width: 100px;
+   height: 100px;
+}
+
+.logo {
+  float: left;
+  display:block;
+  width: 200px;
+  margin-top: 10px;
+}
+
