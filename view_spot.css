@@ -1,3 +1,9 @@
+.station_name {
+    font-size: 30px;
+}
+.spot_name {
+    font-size: 20px;
+}
 #main {
     width: 1000px;
     height: 700px;
