@@ -77,7 +77,7 @@ close_db($link);
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
             };
             function indicate_spot() {
-                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
             };
@@ -92,15 +92,21 @@ close_db($link);
                     console.log(station_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
-                        data: station_id,
+                        type: 'POST',
+                        data: {
+                            'station_id': station_id
+                            },
                         dataType:'json'
                     }).done(function(data){
-                        var rand_spot_number = Math.floor( Math.random() * data.length ) - 1;
-                        $('.spot_picture').html('<img class="pic_size" src="spot_picture/" alt="" title="">');
-                        $('.spot_info').html(data[rand_spot_number].comment);
-                        $('.spot_name').html(data[rand_spot_number].spot_name);
-                    }).fail(function(){
+                        console.log(data);
+                        console.log(data.comment);
+                        console.log(data.image);
+                        $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
+                        $('.spot_info').html(data.comment);
+                        $('.spot_name').html(data.spot_name);
+                    }).fail(function(data){
                         alert('エラーです');
+                        console.log(data);
                     });
                 });
             });
