@@ -89,6 +89,7 @@ close_db($link);
                 $('#only_change_spot').click(function(e) {
                     e.preventDefault();
                     var station_id = $('#only_change_spot').val();
+                    console.log(station_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
                         data: station_id,
