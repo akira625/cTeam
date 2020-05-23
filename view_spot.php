@@ -16,7 +16,6 @@ $rand_spot_number = mt_rand(1, $number_spots) - 1;
 
 close_db($link);
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -53,8 +52,9 @@ close_db($link);
                     </div>
                     <div class="button_box">
                         <form action="view_spot.php" method="post">
-                            <input type="submit" value="選び直す">
+                            <input type="submit" value="駅から選び直す">
                         </form>
+                        <button id="only_change_spot" value="<?php print h($stations_data[$rand_station_number]['station_id']); ?>">スポットだけ選び直す</button>
                         <form action="top_page.php" method="post">
                             <input type="submit" value="TOPに戻る">
                         </form>
@@ -65,6 +65,7 @@ close_db($link);
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script>
         function init(){
             var random_station = {
@@ -75,11 +76,34 @@ close_db($link);
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
             };
-            $(function() {
+            function indicate_spot() {
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+            };
+            $(function() {
+                indicate_spot();
             });
+            
+            $(function() {
+                $('#only_change_spot').click(function(e) {
+                    e.preventDefault();
+                    var station_id = $('#only_change_spot').val();
+                    $.ajax( {
+                        url: 'only_change_spot.php',
+                        data: station_id,
+                        dataType:'json'
+                    }).done(function(data){
+                        var rand_spot_number = Math.floor( Math.random() * data.length ) - 1;
+                        $('.spot_picture').html('<img class="pic_size" src="spot_picture/" alt="" title="">');
+                        $('.spot_info').html(data[rand_spot_number].comment);
+                        $('.spot_name').html(data[rand_spot_number].spot_name);
+                    }).fail(function(){
+                        alert('エラーです');
+                    });
+                });
+            });
+            
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];
             var map = new google.maps.Map(
@@ -103,14 +127,6 @@ close_db($link);
                 content: '<a href="http://www.google.co.jp/search?q=<?php print h($stations_data[$rand_station_number]['station_name']); ?>"><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
             });
             infoWindow.open(map, marker); 
-            // $('marker').click(function(e){
-            //     // ここにメッセージと画像を表示させる処理
-            //     $('.spot_info').html('東京駅');
-            // });
-            marker.addListener('click', function(e){
-                // ここにメッセージと画像を表示させる処理
-                // $('.spot_info').html('東京駅');
-            });
             //追加マーカーは関数化？
             var spot1 = new google.maps.Marker({
                 map: map,
@@ -134,26 +150,6 @@ close_db($link);
                 
             });
             
-            // var marker3 = new google.maps.Marker({
-            //     map: map,
-            //     position: location3,
-            //     // title: 'KITTE', // マウスオーバー時に表示。
-            //     icon: {
-            //         url: './icon/icon.png',
-            //         scaledSize: new google.maps.Size(40, 60)
-            //     }
-            //     // animation: google.maps.Animation.BOUNCE
-            // });
-            // var infoWindow = new google.maps.InfoWindow({
-            //     content: '<a href="">KITTE</a>'
-            // });
-            // infoWindow.open(map, marker3); 
-            // marker3.addListener('click', function(e){
-                // ここにメッセージと画像を表示させる処理
-                // $('.spot_picture').html('<img class="pic_size" src="spot_picture/800px-Tokyo_Midtown.2.jpeg" alt="東京ミッドタウン" title="東京ミッドタウン">');
-                // $('.spot_picture').html('<img class="pic_size" src="spot_picture/4472_1_1400x1100.jpg" alt="KITTE" title="KITTE">');
-                // $('.spot_info').html('KITTE');
-            // });
         }
     </script>
 </body>
