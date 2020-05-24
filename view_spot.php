@@ -104,6 +104,7 @@ close_db($link);
                         $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
+                        spot1.setMap(null);
                     }).fail(function(data){
                         alert('エラーです');
                         console.log(data);

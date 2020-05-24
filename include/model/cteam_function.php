@@ -36,7 +36,6 @@ function get_spot_table($link, $station_id) {
                 lat, lng, address, address, image, comment
             FROM spot_table
             WHERE station_id = {$station_id}";
-    var_dump($sql);
     $spot_data = get_as_array($link, $sql);
     return $spot_data;
 }
