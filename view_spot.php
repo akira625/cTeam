@@ -81,6 +81,17 @@ close_db($link);
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
             };
+            function createMarker(lat, lng){
+                //マーカの作成
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(lat, lng),
+                    icon: {
+                            url: './icon/icon.png',
+                            scaledSize: new google.maps.Size(40, 60)
+                           }
+                });
+            }
             $(function() {
                 indicate_spot();
             });
@@ -105,6 +116,7 @@ close_db($link);
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
                         spot1.setMap(null);
+                        createMarker(data.lat, data.lng);
                     }).fail(function(data){
                         alert('エラーです');
                         console.log(data);
@@ -135,6 +147,7 @@ close_db($link);
                 content: '<a href="http://www.google.co.jp/search?q=<?php print h($stations_data[$rand_station_number]['station_name']); ?>"><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
             });
             infoWindow.open(map, marker); 
+            
             //追加マーカーは関数化？
             var spot1 = new google.maps.Marker({
                 map: map,
@@ -152,7 +165,7 @@ close_db($link);
             infoWindow.open(map, spot1); 
             spot1.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
                 
