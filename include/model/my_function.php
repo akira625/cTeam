@@ -75,7 +75,7 @@ function receive_session($value) {
 //引数：受け取りたいsession名
 //返り値：受け取った値もしくは空配列
 function receive_errors() {
-    $errors = receive_session('errors'); 
+    $errors = receive_session('errors');
     if($errors === ''){
         return [];
     }
