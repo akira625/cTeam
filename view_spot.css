@@ -4,7 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     /*background-color: #eebbcb;*/
-    background-image: url("view_spot_css.jpg");
+    background-image: url("./background_pic/view_spot_css.jpg");
 }
 #left {
     width: 700px;
