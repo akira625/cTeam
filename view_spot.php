@@ -5,12 +5,15 @@ require_once './include/model/cteam_function.php';
 
 $link = connect_db();
 
-$stations_data = get_station_table($link);
-$number_stations = count($stations_data);
-$rand_station_number = mt_rand(1, $number_stations) - 1;
-$station_id = $stations_data[$rand_station_number]['station_id'];
+// $stations_data = get_station_table($link);
+// $number_stations = count($stations_data);
+// $rand_station_number = mt_rand(1, $number_stations) - 1;
+// $station_id = $stations_data[$rand_station_number]['station_id'];
 
-$spot_data = get_spot_table($link, $station_id);
+// $tag_id = recieve_session(tag_id);
+$tag_id = mt_rand(1,5);
+
+$spot_data = get_spot_table($link, $tag_id);
 $number_spots = count($spot_data);
 $rand_spot_number = mt_rand(1, $number_spots) - 1;
 
@@ -39,7 +42,7 @@ close_db($link);
         <div id="main">
             <div id="left">
                 <div id="spot_name_box">
-                    <h1 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
+                    <!--<h1 class="station_name"></h1>-->
                     <h2 class="spot_name"></h2>
                 </div>
                 <div id="map_box"></div>
@@ -51,10 +54,7 @@ close_db($link);
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <form action="view_spot.php" method="post">
-                            <input type="submit" value="駅から選び直す">
-                        </form>
-                        <button id="only_change_spot" value="<?php print h($stations_data[$rand_station_number]['station_id']); ?>">スポットだけ選び直す</button>
+                        <button id="only_change_spot" value="<?php print h($tag_id); ?>">スポットだけ選び直す</button>
                         <form action="top_page.php" method="post">
                             <input type="submit" value="TOPに戻る">
                         </form>
@@ -68,10 +68,6 @@ close_db($link);
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script>
         function init(){
-            var random_station = {
-                lat: <?php print h($stations_data[$rand_station_number]['lat']); ?>,
-                lng: <?php print h($stations_data[$rand_station_number]['lng']); ?>
-            };
             var random_spot = {
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
@@ -81,16 +77,22 @@ close_db($link);
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
             };
-            function createMarker(lat, lng){
+            function createMarker(lat, lng, name){
                 //マーカの作成
-                var marker = new google.maps.Marker({
+                var new_position = new google.maps.LatLng(lat, lng);
+                spot_marker = new google.maps.Marker({
                     map: map,
-                    position: new google.maps.LatLng(lat, lng),
+                    position: new_position,
                     icon: {
                             url: './icon/icon.png',
                             scaledSize: new google.maps.Size(40, 60)
                            }
                 });
+                infoWindow = new google.maps.InfoWindow({
+                    content: '<a href="http://www.google.co.jp/search?q='+ name +'">'+ name +'</a>'
+                });
+                map.panTo(new_position);
+                infoWindow.open(map, spot_marker); 
             }
             $(function() {
                 indicate_spot();
@@ -99,24 +101,21 @@ close_db($link);
             $(function() {
                 $('#only_change_spot').click(function(e) {
                     e.preventDefault();
-                    var station_id = $('#only_change_spot').val();
-                    console.log(station_id);
+                    var tag_id = $('#only_change_spot').val();
+                    console.log(tag_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
                         type: 'POST',
                         data: {
-                            'station_id': station_id
+                            'tag_id': tag_id
                             },
                         dataType:'json'
                     }).done(function(data){
-                        console.log(data);
-                        console.log(data.comment);
-                        console.log(data.image);
                         $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
-                        spot1.setMap(null);
-                        createMarker(data.lat, data.lng);
+                        spot_marker.setMap(null);
+                        createMarker(data.lat, data.lng, data.spot_name);
                     }).fail(function(data){
                         alert('エラーです');
                         console.log(data);
@@ -130,7 +129,7 @@ close_db($link);
                 map_box, // 第１引数は上で取得したマップ表示対象のdiv要素。
                 {
                     // 第２引数で各種オプションを設定
-                    center: random_station, 
+                    center: random_spot, 
                     zoom: 15.5, // 地図の拡大のレベルを15に。（1 - 18くらい）
                     disableDefaultUI: true, // 各種UI(航空写真、ストリートビューなど)をOFFに
                     zoomControl: true, // 拡大縮小だけできるように
@@ -138,18 +137,18 @@ close_db($link);
                     // streetview: true
                 }
             );
-            var marker = new google.maps.Marker({
-                map: map,
-                position: random_station,
-            });
-            var infoWindow = new google.maps.InfoWindow({
-                // position: shinagawa,
-                content: '<a href="http://www.google.co.jp/search?q=<?php print h($stations_data[$rand_station_number]['station_name']); ?>"><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
-            });
-            infoWindow.open(map, marker); 
+            // var marker = new google.maps.Marker({
+            //     map: map,
+            //     position: random_station,
+            // });
+            // var infoWindow = new google.maps.InfoWindow({
+            //     // position: shinagawa,
+            //     content: '<a href="http://www.google.co.jp/search?q="></a>'
+            // });
+            // infoWindow.open(map, marker); 
             
             //追加マーカーは関数化？
-            var spot1 = new google.maps.Marker({
+            var spot_marker = new google.maps.Marker({
                 map: map,
                 position: random_spot,
                 // title: '東京ミッドタウン日比谷', // マウスオーバー時に表示。
@@ -162,8 +161,8 @@ close_db($link);
             var infoWindow = new google.maps.InfoWindow({
                 content: '<a href="http://www.google.co.jp/search?q=<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>"><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
             });
-            infoWindow.open(map, spot1); 
-            spot1.addListener('click', function(e){
+            infoWindow.open(map, spot_marker); 
+            spot_marker.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
