@@ -58,43 +58,87 @@ require_once './include/model/cteam_function.php';
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
     <script>
         function init(){
-            var random_station = {
-                lat: <?php print h($stations_data[$rand_station_number]['lat']); ?>,
-                lng: <?php print h($stations_data[$rand_station_number]['lng']); ?>
-            };
             var random_spot = {
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
             };
+            function indicate_spot() {
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
+                $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
+                $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+            };
+            function createMarker(lat, lng, name){
+                //マーカの作成
+                var new_position = new google.maps.LatLng(lat, lng);
+                spot_marker = new google.maps.Marker({
+                    map: map,
+                    position: new_position,
+                    icon: {
+                            url: './icon/icon.png',
+                            scaledSize: new google.maps.Size(40, 60)
+                           }
+                });
+                infoWindow = new google.maps.InfoWindow({
+                    content: '<a href="http://www.google.co.jp/search?q='+ name +'">'+ name +'</a>'
+                });
+                map.panTo(new_position);
+                infoWindow.open(map, spot_marker); 
+            }
+            $(function() {
+                indicate_spot();
+            });
+            
+            $(function() {
+                $('#only_change_spot').click(function(e) {
+                    e.preventDefault();
+                    var tag_id = $('#only_change_spot').val();
+                    console.log(tag_id);
+                    $.ajax( {
+                        url: 'only_change_spot.php',
+                        type: 'POST',
+                        data: {
+                            'tag_id': tag_id
+                            },
+                        dataType:'json'
+                    }).done(function(data){
+                        $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
+                        $('.spot_info').html(data.comment);
+                        $('.spot_name').html(data.spot_name);
+                        spot_marker.setMap(null);
+                        createMarker(data.lat, data.lng, data.spot_name);
+                    }).fail(function(data){
+                        alert('エラーです');
+                        console.log(data);
+                    });
+                });
+            });
+            
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];
             var map = new google.maps.Map(
                 map_box, // 第１引数は上で取得したマップ表示対象のdiv要素。
                 {
                     // 第２引数で各種オプションを設定
-                    center: random_station, 
-                    zoom: 15, // 地図の拡大のレベルを15に。（1 - 18くらい）
+                    center: random_spot, 
+                    zoom: 15.5, // 地図の拡大のレベルを15に。（1 - 18くらい）
                     disableDefaultUI: true, // 各種UI(航空写真、ストリートビューなど)をOFFに
                     zoomControl: true, // 拡大縮小だけできるように
                     clickableIcons: false, // クリック関連の機能をoffに。
                     // streetview: true
                 }
             );
-            var marker = new google.maps.Marker({
-                map: map,
-                position: random_station,
-            });
-            var infoWindow = new google.maps.InfoWindow({
-                // position: shinagawa,
-                content: '<a href=""><?php print h($stations_data[$rand_station_number]['station_name']); ?></a>'
-            });
-            infoWindow.open(map, marker); 
-            // $('marker').click(function(e){
-            //     // ここにメッセージと画像を表示させる処理
-            //     $('.spot_info').html('東京駅');
+            // var marker = new google.maps.Marker({
+            //     map: map,
+            //     position: random_station,
             // });
+            // var infoWindow = new google.maps.InfoWindow({
+            //     // position: shinagawa,
+            //     content: '<a href="http://www.google.co.jp/search?q="></a>'
+            // });
+            // infoWindow.open(map, marker); 
+            
             //追加マーカーは関数化？
-            var spot1 = new google.maps.Marker({
+            var spot_marker = new google.maps.Marker({
                 map: map,
                 position: random_spot,
                 // title: '東京ミッドタウン日比谷', // マウスオーバー時に表示。
@@ -105,16 +149,17 @@ require_once './include/model/cteam_function.php';
                 // animation: google.maps.Animation.BOUNCE
             });
             var infoWindow = new google.maps.InfoWindow({
-                content: '<a href=""><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
+                content: '<a href="http://www.google.co.jp/search?q=<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>"><?php print h($spot_data[$rand_spot_number]['spot_name']); ?></a>'
             });
-            infoWindow.open(map, spot1); 
-            spot1.addListener('click', function(e){
+            infoWindow.open(map, spot_marker); 
+            spot_marker.addListener('click', function(e){
                 // ここにメッセージと画像を表示させる処理
-                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="KITTE" title="KITTE">');
+                $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
                 
             });
+            
         }
     </script>
 </body>
