@@ -27,7 +27,6 @@ require_once './include/model/cteam_function.php';
         <div id="main">
             <div id="left">
                 <div id="spot_name_box">
-                    <h2 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h2>
                     <h1 class="spot_name"></h1>
                 </div>
                 <div class="test_flame">
@@ -43,9 +42,7 @@ require_once './include/model/cteam_function.php';
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <form action="view_spot.php" method="post">
-                            <a href="view_spot.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>場所を変える</a>
-                        </form>
+                        <button id="only_change_spot" value="<?php print h($tag_id); ?>">スポットだけ選び直す</button>
                         <form action="top_page.php" method="post">
                             <a href="top_page.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>TOP</a>
                         </form>
