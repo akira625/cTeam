@@ -33,6 +33,12 @@
     margin: 50px;
     background-color: #008b8b;
 }
+/*#map_box {*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    margin: 50px;*/
+/*    background-color: #008b8b;*/
+/*}*/
 #spot_info_box {
     width: 250px;
     height: 650px;
@@ -41,11 +47,21 @@
     margin-right: 50px;
     background-color: #ffffe0;
 }
+/*.spot_picture {*/
+/*    width: 600px;*/
+/*    height: 500px;*/
+/*    margin: 5px 25px;*/
+/*}*/
+
 .spot_picture {
     width: 200px;
     height: 200px;
     margin: 5px 25px;
 }
+/*.pic_size {*/
+/*    width: 600px;*/
+/*    height: 500px;*/
+/*}*/
 .pic_size {
     width: 200px;
     height: 200px;
