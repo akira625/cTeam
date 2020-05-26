@@ -40,10 +40,14 @@ close_db($link);
         <div id="main">
             <div id="left">
                 <div id="spot_name_box">
-                    <h1 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h1>
-                    <h2 class="spot_name"></h2>
+                    <h2 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h2>
+                    <h1 class="spot_name"></h1>
                 </div>
-                <div id="map_box"></div>
+                <div class="test_flame">
+                    <div class="test">
+                        <div id="map_box"></div>
+                    </div>
+                </div>
             </div>
             <div id="right">
                 <div id="spot_info_box">
@@ -53,10 +57,10 @@ close_db($link);
                     </div>
                     <div class="button_box">
                         <form action="view_spot.php" method="post">
-                            <input type="submit" value="選び直す">
+                            <a href="view_spot.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>場所を変える</a>
                         </form>
                         <form action="top_page.php" method="post">
-                            <input type="submit" value="TOPに戻る">
+                            <a href="top_page.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>TOP</a>
                         </form>
                     </div>
                 </div>
