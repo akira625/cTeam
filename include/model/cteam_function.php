@@ -32,9 +32,13 @@ function get_station_table($link) {
 //返り値：配列データ
 function get_spot_table($link, $station_id) {
     $sql = "SELECT 
-                spot_id, spot_name, station_id, status,
-                lat, lng, address, address, image, comment
-            FROM spot_table
+                spot_location_table.spot_id, spot_location_table.station_id, spot_location_table.lat, spot_location_table.lng, 
+                spot_location_table.postal_code, spot_location_table.prefecture, spot_location_table.city, spot_location_table.detail_address, 
+                spot_info_table.spot_name, spot_info_table.comment, spot_info_table.image, spot_info_table.genre, spot_info_table.status, 
+                spot_info_table.created, spot_info_table.updated
+            FROM spot_location_table
+            JOIN spot_info_table
+            ON spot_location_table.spot_id = spot_info_table.spot_id
             WHERE station_id = {$station_id}";
     $spot_data = get_as_array($link, $sql);
     return $spot_data;
