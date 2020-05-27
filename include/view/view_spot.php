@@ -91,12 +91,15 @@ require_once './include/model/cteam_function.php';
                 $('#only_change_spot').click(function(e) {
                     e.preventDefault();
                     var tag_id = $('#only_change_spot').val();
+                    var genre_id = <?php print h($genre_id); ?>;
                     console.log(tag_id);
+                    console.log(genre_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
                         type: 'POST',
                         data: {
-                            'tag_id': tag_id
+                            'tag_id': tag_id,
+                            'genre_id': genre_id
                             },
                         dataType:'json'
                     }).done(function(data){
