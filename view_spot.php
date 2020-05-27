@@ -11,10 +11,10 @@ $link = connect_db();
 // $rand_station_number = mt_rand(1, $number_stations) - 1;
 // $station_id = $stations_data[$rand_station_number]['station_id'];
 
-// $tag_id = recieve_session('tag_id');
-$tag_id = 2;
-var_dump($_SESSION["genre_id"]);
+$tag_id = receive_session('tag_id');
+// $tag_id = 2;
 $genre_id = receive_session('genre_id');
+var_dump($tag_id);
 var_dump($genre_id);
 
 

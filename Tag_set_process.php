@@ -22,6 +22,7 @@ var_dump($tag_id);
 // エラーチェック
 if($tag_id === ''){
     $_SESSION['errors'][] = 'タグを選んでください。';
+    redirect(C_TEAM_TOP_PAGE);
 }
 
 $errors = receive_errors();
