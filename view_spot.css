@@ -41,14 +41,16 @@ h2 {
     height: 400px;
 }
 .test {
-    background-color: #8484ff;
+    background-color: #e8d3c7;
     border:solid 20px #fbfaf5;
     border-bottom:solid 90px #fbfaf5;
+    width: 580px;
 }
 .test_flame {
     margin: 50px;
     margin-top: 20px;
     border:solid 1px #583822;
+    width: 622px;
 }
 #spot_info_box {
     width: 250px;
