@@ -6,6 +6,22 @@ require_once './include/model/cteam_function.php';
 session_start();
 $link = connect_db();
 
+if(isset($_SESSION['user_id']) === TRUE) {
+    if($_SESSION['user_id'] === 'admin'){
+        $user_name = 'admin';
+    }else{
+        $user_id = $_SESSION['user_id'];
+        $user_name = get_user_name($link, $user_id);
+    }
+}else{
+    $user_name = '';
+}
+
+// $stations_data = get_station_table($link);
+// $number_stations = count($stations_data);
+// $rand_station_number = mt_rand(1, $number_stations) - 1;
+// $station_id = $stations_data[$rand_station_number]['station_id'];
+
 $tag_id = receive_session('tag_id');
 // $tag_id = 2;
 $genre_id = receive_session('genre_id');
