@@ -2,13 +2,13 @@
 <html lang="ja">
 <head>
    <meta charset="UTF-8">
-   <title>管理者ログインページ</title> 
+   <title>ログインページ</title> 
 </head>
 <link type = "text/css" rel = "stylesheet" href = "common.css">
 <body>
     <header>
         <div class = "header-box">
-            <a href = "./login.php">
+            <a href = "./top_page.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
             <a href = "./login.php">
@@ -17,6 +17,7 @@
         </div>
     </header>
     <div class = "content">
+        <p>スポット追加にはログインが必要です。</p>
         <div class = "login">
             <form action = "login_process.php" method = "post">
             <div>

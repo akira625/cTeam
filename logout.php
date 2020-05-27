@@ -12,4 +12,4 @@ if (isset($_COOKIE[$session_name]) === true) {
   setcookie($session_name, '', time() - 3600);
 }
 session_destroy();
-redirect_to('login.php');
+redirect_to('top_page.php');

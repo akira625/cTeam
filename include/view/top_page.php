@@ -20,8 +20,15 @@ require_once '../cTeam/include/model/my_function.php';
             <a href = "./top_page.php">
                 <img class = "logo" src="../cTeam/header-img/logo.png">
             </a>
-            <a href = "./top_page.php">
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <a class = "menu" href = "./logout.php">ログアウト</a>
+            <?php }?>
+            <a href = "./login.php">
                 <img class = "walk" src="../cTeam/header-img/walk.png">
+            </a>
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <p class = "menu">ユーザー名:<?php print h($user_name); ?></p>
+            <?php }?>
             </a>
         </div>
     </header>
@@ -48,6 +55,6 @@ require_once '../cTeam/include/model/my_function.php';
             </div>
         </div>
     </div>
-    <a href="../../login.php" class="for-admin">管理者ページリンク</a>
+    <a href="./login.php" class="for-admin">スポット追加はこちら</a>
 </body>
 </html>

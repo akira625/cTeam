@@ -337,6 +337,18 @@ function get_user_id($link, $new_user){
     return get_as_row($link, $sql);
 }
 
+function get_user_name($link, $user_id){
+    $sql = "SELECT 
+                user_name
+            FROM 
+                users_table
+            WHERE 
+                user_id = '{$user_id}'
+            ";
+
+    return get_as_row($link, $sql);
+}
+
 function preg_match_int($int){
     return preg_match('/^([1-9][0-9]*|0)$/',$int);
 }

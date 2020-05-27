@@ -126,6 +126,19 @@ if($sql_kind === 'insert'){
 
 // コネクション取得
 $link= get_db_connect();
+
+session_start();
+
+if(isset($_SESSION['user_id']) === TRUE) {
+    if($_SESSION['user_id'] === 'admin'){
+        $user_name = 'admin';
+    }else{
+        $user_id = $_SESSION['user_id'];
+        $user_name = get_user_name($link, $user_id)['user_name'];
+    }
+}else{
+    $user_name = '';
+}
    
 $stations = select_stations($link);
 
