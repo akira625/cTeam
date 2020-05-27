@@ -10,7 +10,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     /*background-color: #f8f4e6;*/
-    background-image: url("view_spot_css.jpg");
+    background-image: url("./background_pic/view_spot_css.jpg");
 }
 #left {
     width: 700px;
