@@ -33,20 +33,20 @@ require_once './include/model/cteam_function.php';
                 </div>
                 <div class="test_flame">
                     <div class="test">
-                        <div id="map_box"></div>
+                        <div class="spot_picture"></div>
                     </div>
                 </div>
             </div>
             <div id="right">
                 <div id="spot_info_box">
-                    <div class="spot_picture"></div>
+                    <div id="map_box"></div>
                     <div class="spot_info_comment_box">
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <button id="only_change_spot" value="<?php print h($tag_id); ?>">スポットだけ選び直す</button>
+                        <button id="only_change_spot" class="btn-flat-logo value="<?php print h($tag_id); ?>">スポットをかえる</button>
                         <form action="top_page.php" method="post">
-                            <a href="top_page.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>TOP</a>
+                            <button class="btn-flat-logo">TOPにもどる</button>
                         </form>
                     </div>
                 </div>
