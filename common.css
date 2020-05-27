@@ -37,14 +37,14 @@ a:hover {
 
 body {
   font-family: sans-serif;
-  background-color: #fff1cf;
+  background-color: #fdeff2;
   height: 100%;
   min-width: 960px;
 }
 
 header {
   height: 60px;
-  background-color: #17184b;
+  background-color: #f4b3c2;
 }
 
 .header-box {
