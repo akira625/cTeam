@@ -22,12 +22,14 @@ var_dump($genre_id);
 // エラーチェック
 if($genre_id === ''){
     $_SESSION['errors'][] = 'ジャンルを選んでください。';
+    redirect(C_TEAM_TOP_PAGE);
 }
 
 $errors = receive_errors();
 // エラーがなければセッションにIDを代入
 if(count($errors) === 0){
     $_SESSION["genre_id"] = $genre_id;
+    var_dump($_SESSION["genre_id"]);
 }
 
-// redirect(C_TEAM_VIEW_SPOT);
+redirect(C_TEAM_VIEW_SPOT);

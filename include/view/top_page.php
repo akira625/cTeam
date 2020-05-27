@@ -23,7 +23,8 @@ require_once '../cTeam/include/model/my_function.php';
             <?php if (isset($_SESSION['user_id']) === TRUE){?>
                 <a class = "menu" href = "./logout.php">ログアウト</a>
             <?php }?>
-            <a href = "./login.php">
+            <a href = "../cTeam/login.php">
+
                 <img class = "walk" src="../cTeam/header-img/walk.png">
             </a>
             <?php if (isset($_SESSION['user_id']) === TRUE){?>
@@ -38,23 +39,54 @@ require_once '../cTeam/include/model/my_function.php';
     <div class="start content">
         <div class="start-box">
             <div class='btn_box'>
-                <form action="../cTeam/Tag_set_process.php" method="post">
+                
                     <div class="btn_position1">
-                        <input type="submit" class="btn-square-soft-pink" value="かわいい">
+                        <div class="btn-square-soft-pink">
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn1" value="かわいい">
+                            <input type="hidden" name="tag_id" value="1">
+                            </form>
+                        </div>
                     </div>
                     <div class="btn_position2">
-                        <input type="submit" class="btn-square-soft-red" value="おいしい">
-                        <input type="submit" class="btn-circle" value="らんだむ">
-                        <input type="submit" class="btn-square-soft-orange" value="たのしい">
+                        <div class="btn-square-soft-red">
+                        <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn2" value="おいしい">
+                            <input type="hidden" name="tag_id" value="2">
+                        </form>
+                        </div>
+                        <div class="btn-circle">
+                        <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn6" value="らんだむ">
+                            <input type="hidden" name="tag_id" value="6">
+                        </form>
+                        </div>
+                        <div class="btn-square-soft-orange">
+                        <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn3" value="たのしい">
+                            <input type="hidden" name="tag_id" value="3">
+                        </form>
+                        </div>
                     </div>
                     <div class="btn_position3">
-                        <input type="submit" class="btn-square-soft-purple" value="なつかしい">
-                        <input type="submit" class="btn-square-soft-blue" value="きれい">
+                        <div class="btn-square-soft-purple">
+                        <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn5" value="なつかしい">
+                            <input type="hidden" name="tag_id" value="5">
+                        </form>
+                        </div>
+                        <div class="btn-square-soft-blue">
+                        <form action="../cTeam/Tag_set_process.php" method="post">
+                            <input type="submit" class="btn btn4" value="きれい">
+                            <input type="hidden" name="tag_id" value="4">
+                        </form>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <a href="./login.php" class="for-admin">スポット追加はこちら</a>
+
+    <a href="../cTeam/login.php" class="for-admin">スポット追加はこちら</a>
 </body>
 </html>
