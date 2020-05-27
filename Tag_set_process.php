@@ -17,12 +17,13 @@ if (get_request_method() !== 'POST') {
 $tag_id = '';
 // POST受け取り
 $tag_id = receive_post('tag_id');
-var_dump($tag_id);
 
 // エラーチェック
 if($tag_id === ''){
     $_SESSION['errors'][] = 'タグを選んでください。';
     redirect(C_TEAM_TOP_PAGE);
+}else if ($tag_id === '6') {
+    redirect(C_TEAM_VIEW_SPOT);
 }
 
 $errors = receive_errors();

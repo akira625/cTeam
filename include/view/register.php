@@ -8,7 +8,7 @@
 <body>
     <header>
         <div class = "header-box">
-            <a href = "./top.php">
+            <a href = "./top_page.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
             <img class = "walk" src="../cTeam/header-img/walk.png">

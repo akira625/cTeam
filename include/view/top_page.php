@@ -43,43 +43,43 @@ require_once '../cTeam/include/model/my_function.php';
                     <div class="btn_position1">
                         <div class="btn-square-soft-pink">
                             <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn1" value="かわいい">
-                            <input type="hidden" name="tag_id" value="1">
+                                <input type="submit" class="btn btn1" value="かわいい">
+                                <input type="hidden" name="tag_id" value="1">
                             </form>
                         </div>
                     </div>
                     <div class="btn_position2">
                         <div class="btn-square-soft-red">
-                        <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn2" value="おいしい">
-                            <input type="hidden" name="tag_id" value="2">
-                        </form>
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                                <input type="submit" class="btn btn2" value="おいしい">
+                                <input type="hidden" name="tag_id" value="2">
+                            </form>
                         </div>
                         <div class="btn-circle">
-                        <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn6" value="らんだむ">
-                            <input type="hidden" name="tag_id" value="6">
-                        </form>
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                                <input type="submit" class="btn btn6" value="らんだむ">
+                                <input type="hidden" name="tag_id" value="6">
+                            </form>
                         </div>
                         <div class="btn-square-soft-orange">
-                        <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn3" value="たのしい">
-                            <input type="hidden" name="tag_id" value="3">
-                        </form>
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                                <input type="submit" class="btn btn3" value="たのしい">
+                                <input type="hidden" name="tag_id" value="3">
+                            </form>
                         </div>
                     </div>
                     <div class="btn_position3">
                         <div class="btn-square-soft-purple">
-                        <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn5" value="なつかしい">
-                            <input type="hidden" name="tag_id" value="5">
-                        </form>
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                                <input type="submit" class="btn btn5" value="なつかしい">
+                                <input type="hidden" name="tag_id" value="5">
+                            </form>
                         </div>
                         <div class="btn-square-soft-blue">
-                        <form action="../cTeam/Tag_set_process.php" method="post">
-                            <input type="submit" class="btn btn4" value="きれい">
-                            <input type="hidden" name="tag_id" value="4">
-                        </form>
+                            <form action="../cTeam/Tag_set_process.php" method="post">
+                                <input type="submit" class="btn btn4" value="きれい">
+                                <input type="hidden" name="tag_id" value="4">
+                            </form>
                         </div>
                     </div>
                 </form>
