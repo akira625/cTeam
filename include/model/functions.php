@@ -70,7 +70,7 @@ function get_get($name){
 }
 function get_post($name){
     if (isset($_POST[$name]) === TRUE){
-        return trim($_POST[$name]);
+        return $_POST[$name];
     }
     return '';
 }
@@ -88,7 +88,7 @@ function is_uploaded($key){
 }
 
 function move_uploaded($key, $filename){
-    return move_uploaded_file($_FILES[$key]['tmp_name'], './img/' . $filename);
+    return move_uploaded_file($_FILES[$key]['tmp_name'], './spot_picture/' . $filename);
 }
 
 function get_file_type($key){
@@ -112,7 +112,7 @@ function make_filename($extension){
     //  ファイル名を作成
     $filename = $random_string . '.' . $extension;
     // 同名ファイルが存在しなくなるまでファイル名を生成
-    while (is_file('img/' . $filename) === TRUE) {
+    while (is_file('./spot_picture/' . $filename) === TRUE) {
         $random_string = make_random();
         $filename = $random_string . '.' . $extension;
     }
@@ -127,25 +127,64 @@ function timestamp(){
     return date('Y-m-d H:i:s');
 }
 
+function insert_register($link, $new_user, $new_pass){
+    $log = timestamp();
+    $sql = "INSERT 
+                users_table(user_name, password, gender, birthdate, created, updated)
+            VALUES
+                ('{$new_user}','{$new_pass}','{$log}','{$log}')
+            ";
+    return execute_query($link, $sql);
+}
+
 
 ///spot管理関連//////////////////////////////////////////////
 
-function insert_spots($link, $spot_name, $station_id, $lat, $lng, $address,$comment,$status,$filename){
+function insert_spotsLocation($link, $station_id, $lat, $lng, 
+                              $postal_code, $prefecture, $city, $detail_address){
     $log = timestamp();
     $sql = "INSERT INTO 
-                spot_table
-                (spot_name, station_id,status, lat, lng, address ,image, comment, created, updated)
+                spot_location_table
+                (station_id, lat, lng, 
+                postal_code, prefecture, city, detail_address)
             VALUES
-                ('{$spot_name}',{$station_id}, '{$status}',{$lat}, {$lng}, '{$address}','{$filename}',
-                '{$comment}', '{$log}','{$log}')
+                ({$station_id} ,{$lat}, {$lng},
+                '{$postal_code}','{$prefecture}','{$city}','{$detail_address}')
+                ";
+                // return $sql;
+    return execute_query($link, $sql);
+}
+
+function insert_spotsInfo($link, $spot_id, $spot_name, $status, 
+                          $filename, $genre, $comment){
+    $log = timestamp();
+    $sql = "INSERT INTO 
+                spot_info_table
+                (spot_id, spot_name, status,
+                image, comment, genre, created, updated)
+            VALUES
+                ('{$spot_id}','{$spot_name}', '{$status}',
+                 '{$filename}', '{$comment}', '{$genre}', '{$log}','{$log}')
                 ";
     return execute_query($link, $sql);
+}
+
+function insert_tags($link, $tags, $spot_id){
+    foreach($tags as $tag){
+        $sql = "INSERT INTO 
+                    tag_spot_table
+                    (tag_id, spot_id)
+                VALUES
+                    ('{$tag}', '{$spot_id}')
+                ";
+        return execute_query($link, $sql);
+    }
 }
 
 function update_comment($link, $spot_id,$update_comment){
     $log = timestamp();
     $sql = "UPDATE
-                spot_table 
+                spot_info_table 
             SET
                 comment = '{$update_comment}',updated = '{$log}'
             WHERE
@@ -156,7 +195,7 @@ function update_comment($link, $spot_id,$update_comment){
 function update_status($link, $spot_id,$status){
     $log = timestamp();
     $sql = "UPDATE
-                spot_table 
+                spot_info_table
             SET
                 status = '{$status}',updated = '{$log}'
             WHERE
@@ -168,23 +207,47 @@ function update_status($link, $spot_id,$status){
 
 function select_spots($link){
     $sql = "SELECT
-                po.spot_id, po.spot_name, po.status, po.lat, po.lng, po.address ,po.comment, 
-                ta.station_name, po.image
+                slt.spot_id, sit.spot_name, sit.status, slt.lat, slt.lng,
+                slt.postal_code, slt.prefecture, slt.city, slt.detail_address,
+                sit.comment, sit.image, sit.genre, ta.station_name
             FROM
-                spot_table AS po
+                spot_location_table AS slt
             JOIN
                 station_table AS ta
             ON
-                po.station_id = ta.station_id
+                slt.station_id = ta.station_id
+            JOIN
+                spot_info_table AS sit
+            ON
+                slt.spot_id = sit.spot_id
             ";
     return get_as_array($link, $sql);
 }
 
-function delete_spot($link, $spot_id){
-    $sql = "DELETE FROM
-                spot_table 
-            WHERE 
+function select_tags($link, $spot_id){
+    $sql = "SELECT
+                tag_id
+            FROM
+                tag_spot_table
+            WHERE
                 spot_id = '{$spot_id}'
+            ";
+    return get_as_array($link, $sql);
+}
+
+// かわいい→$tags[$tag_id]にしたい
+
+function delete_spot($link, $spot_id){
+    $sql = "DELETE 
+                slt, sit
+            FROM
+                spot_location_table AS slt
+            INNER JOIN 
+                spot_info_table AS sit
+            ON
+                slt.spot_id = sit.spot_id
+            WHERE 
+                slt.spot_id = '{$spot_id}'
             ";
     return execute_query($link, $sql);
 }
@@ -263,3 +326,13 @@ function close_transaction($link, $errors){
 }
 
 
+function get_user_id($link, $new_user){
+    $sql = "SELECT 
+                user_id
+            FROM 
+                users_table
+            WHERE 
+                user_name = '{$new_user}'
+            ";
+    return get_as_row($link, $sql);
+}

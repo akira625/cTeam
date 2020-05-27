@@ -34,7 +34,7 @@ if (isset($user['user_id']) === TRUE) {
     if($user['user_id'] === '1'){
         redirect_to('admin_spot.php'); 
     }
-    redirect_to('login.php');
+    redirect_to('top_page.php');
 }
 
 $_SESSION['login_error'] = 'ユーザー名あるいはパスワードが違います。';

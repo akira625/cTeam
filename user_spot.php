@@ -2,17 +2,11 @@
 require_once './include/conf/const.php';
 require_once './include/model/functions.php';
 
-session_start();
-if(isset($_SESSION['user_id']) === TRUE) {
-    $user_id = $_SESSION['user_id'];
-}else{
-    redirect_to('login.php');
-    exit;
-}
 
 $message     = '';     
 $errors     = [];     // エラーメッセージ
 $filename = '';
+$status = 0;
 $tags_name = [
 '1' => 'かわいい',
 '2' => 'おいしい',
@@ -53,12 +47,9 @@ if($sql_kind === 'insert'){
     
     $comment = get_post('comment');
     
-    $status = get_post('status');
-
     $tags = get_post('tags');
     
     $genre = get_post('genre');
-
     //
     //エラーチェック
     //
@@ -96,13 +87,7 @@ if($sql_kind === 'insert'){
     }
     
     if($genre === ''){
-        $errors[] = 'ジャンルを選択してください。';
-    }
-    
-    if($status === ''){
-        $errors[] = 'ステータスを入力してください。';
-    }else if($status !== '1' && $status !== '0'){
-        $errors[] = '不正な処理です。';
+        $errors[] = 'ジャンルを入力してください。';
     }
     
     if($lat === ''){
@@ -139,37 +124,6 @@ if($sql_kind === 'insert'){
 
 }
 
-if($sql_kind === 'update_comment'){
-    
-    $update_comment = get_post('update_comment');
-    
-    $spot_id = get_post('spot_id');
-    
-    if(is_blank($update_comment) === TRUE){
-        $errors[] = 'コメントを入力してください';
-    }
-}
-
-if($sql_kind === 'update_status'){
-    $status = get_post('status');
-    $spot_id = get_post('spot_id');
-
-    if(is_blank($status) === TRUE){
-        $errors[] = 'ステータスを入力してください。';
-    }else if($status !== '1' && $status !== '0'){
-        $errors[] = '不正な処理です。';
-    }
-}
-
-if($sql_kind === 'delete'){
-    $delete = get_post('delete');
-    $spot_id = get_post('spot_id');
-    
-    if($delete !== '' && $delete !== '削除する'){
-        $errors[] = '不正な処理です。';
-    }
-}
-
 // コネクション取得
 $link= get_db_connect();
    
@@ -184,8 +138,9 @@ if(is_post() === TRUE && count($errors) === 0){
         
         start_transaction($link);
         
+        // var_dump(insert_spotsLocation($link, $station_id, $lat, $lng, $postal_code, $prefecture, $city, $detail_address));
         if(insert_spotsLocation($link, $station_id, $lat, $lng, $postal_code, $prefecture, $city, $detail_address) === TRUE){
-            $spot_id = mysqli_insert_id();
+            $spot_id = mysqli_insert_id($link);
             if(insert_spotsInfo($link, $spot_id, $spot_name, $status, $filename, $genre, $comment) === TRUE){
                 if(insert_tags($link, $tags, $spot_id) === TRUE){
                     $message = 'スポットを追加しました。';
@@ -201,38 +156,12 @@ if(is_post() === TRUE && count($errors) === 0){
         
     }
     
-    if($sql_kind === 'update_comment'){
-        if(update_comment($link, $spot_id, $update_comment) === TRUE){
-            $message = 'コメントを変更しました。';
-        }else{
-            $errors[] = 'UPDATE処理失敗'.$sql;
-        }
-    }
-    
-    if($sql_kind === 'update_status'){
-        if(update_status($link, $spot_id,$status) === TRUE){
-         $message = 'ステータスを変更しました。';
-        }else{
-            $errors[] = 'UPDATE処理失敗';
-        }
-    }
-    
-    if($sql_kind === 'delete'){
-        if(delete_spot($link, $spot_id) === TRUE){
-            $message = 'データを削除しました。';
-        }else{
-            $errors[] = 'delete処理失敗';
-        }
-    }
-    
     close_transaction($link, $errors);
 }   
 
 $spots = select_spots($link);
 
-// var_dump($errors);
-
 close_db_connect($link);
 
-include_once './include/view/admin_spot.php';
+include_once './include/view/user_spot.php';
 // include_once '../include/view/goods_management.php';
