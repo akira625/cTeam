@@ -281,7 +281,11 @@ input[type="file"] {
   width: 600px;
 }
 
-.comment{
+.table_spot_name{
+  width: 170px;
+}
+
+.table_comment{
   width: 330px;
 }
 

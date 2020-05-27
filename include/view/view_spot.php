@@ -18,8 +18,15 @@ require_once './include/model/cteam_function.php';
             <a href = "./top_page.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
-            <a href = "./top_page.php">
-                <img class = "walk" src="./header-img/walk.png">
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <a class = "menu" href = "./logout.php">ログアウト</a>
+            <?php }?>
+            <a href = "./login.php">
+                <img class = "walk" src="../cTeam/header-img/walk.png">
+            </a>
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <p class = "menu">ユーザー名:<?php print h($user_name); ?></p>
+            <?php }?>
             </a>
         </div>
     </header>

@@ -6,6 +6,26 @@ require_once './include/model/cteam_function.php';
 
 session_start();
 
+session_start();
+$link = connect_db();
+
+session_start();
+
+if(isset($_SESSION['user_id']) === TRUE) {
+    if($_SESSION['user_id'] === 'admin'){
+        $user_name = 'admin';
+    }else{
+        $user_id = $_SESSION['user_id'];
+        $user_name = get_user_name($link, $user_id);
+    }
+}else{
+    $user_name = '';
+}
+
+$errors = receive_errors();
+
+close_db($link);
+
 //POSTでなければ戻す
 if (get_request_method() !== 'POST') {
     $_SESSION['errors'][] = 'POST送信ではありません、ジャンルを選択してください。';

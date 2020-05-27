@@ -46,3 +46,6 @@ function get_spot_table($link, $tag_id, $genre_id) {
     $spot_data = get_as_array($link, $sql);
     return $spot_data;
 }
+
+
+

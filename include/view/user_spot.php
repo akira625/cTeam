@@ -150,9 +150,9 @@
             <table class="user_spot_table">
                 <tr>
                     <th class="spot_img">スポット画像</th>
-                    <th class="spot_name">スポット名</th>
+                    <th class="table_spot_name">スポット名</th>
                     <th>最寄り駅</th>
-                    <th class="comment">コメント</th>
+                    <th class="table_comment">コメント</th>
                     <th>タグ</th>
                     <th>ジャンル</th>
                 </tr>

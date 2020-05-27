@@ -11,7 +11,7 @@
             <a href = "./top.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
-            <a href = "./cart.php" class = "cart"></a>
+            <img class = "walk" src="../cTeam/header-img/walk.png">
         </div>
     </header>
     <div class = "content">
