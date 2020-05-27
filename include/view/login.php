@@ -8,10 +8,10 @@
 <body>
     <header>
         <div class = "header-box">
-            <a href = "./top_page.php">
+            <a href = "./login.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
-            <a href = "./top_page.php">
+            <a href = "./login.php">
                 <img class = "walk" src="./header-img/walk.png">
             </a>
         </div>
@@ -31,6 +31,9 @@
                     <li class="err-msg"><?php print h($error);?></li>
                 <?php }?>
             <?php }?>
+            <div class = "account-create">
+                <a href="./register.php">ユーザーの新規作成</a>
+            </div>
         </form> 
         </div>
     </div>

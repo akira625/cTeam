@@ -11,6 +11,13 @@
     <a href="./logout.php">ログアウト</a>
     <a href="./admin_station.php">駅管理ページ</a>
     <a href="./admin_user.php">ユーザ管理ページ</a>
+    <ul>
+    <?php if(count($errors) !== 0){?>
+        <?php foreach($errors as $error){?>
+            <li class="errors"><?php print h($error);?></li>
+        <?php }?>
+    <?php }?>
+    </ul>
     <?php if($message !== ''){?>
         <p><?php print h($message); ?></p>
     <?php }?>
@@ -28,14 +35,38 @@
                     <?php }?>
                 </select>
             </label><br>
-            <label>
-                住所:<input type = "text" name = "address" id="address">
-                <button id="search" name="search" id="search">緯度・経度を検索</button><br>
-            </label>
-            <label>緯度:<input type = "text" name = "lat" id="lat"></label><br>
-            <label>経度:<input type = "text" name = "lng" id="lng"></label><br>
-            <label>コメント:
-                <br><textarea name='comment' class='comment'></textarea>
+            <div class="address">
+                <label>郵便番号:
+                    <input id="postal_code" name="postal_code" type="text" placeholder="1040052"><br>
+                    <input type="button" value="住所を自動で入力する" id="insert_address">
+                </label><br>
+                <label>都道府県:
+                    <input id="prefecture" name="prefecture" type="text" placeholder="東京都">
+                </label><br>
+                市区町村:<input id = "city" name = "city" type = "text" placeholder="中央区"><br>
+                番地以下:<input name = "detail_address" id="detail_address" type = "text" placeholder="月島3-26-4"><br>
+                <button id="search" name="search" id="search">住所から緯度・経度を検索</button><br>
+                <label>緯度:<input type = "text" name = "lat" id="lat"></label><br>
+                <label>経度:<input type = "text" name = "lng" id="lng"></label><br>
+            </div>
+            <label>コメント:<br>
+                <textarea name='comment' class='comment'></textarea>
+            </label><br>
+            <label>タグ(複数選択可):
+                    <?php foreach($tags_name as $key => $value){?>
+                    <input type="checkbox" name="tags[]" value="<?php print h($key);?>">
+                            <?php print h($value);?>
+                    <?php }?>
+            </label><br>
+            <label>ジャンル(一つだけ選択):
+                <select name='genre'>
+                    <option value=''>選択してください</option>
+                    <?php foreach($genres_name as $key => $value){?>
+                        <option value='<?php print h($key);?>'>
+                            <?php print h($value);?>
+                        </option>
+                    <?php }?>
+                </select>
             </label><br>
             <input type = "file" name = "image"><br>
             <input type = "radio" name = "status" value = '1'>公開
@@ -45,13 +76,6 @@
             <input type = "submit" name = "submit" value = "スポット追加">
         </form>
     </div>
-    <ul>
-    <?php if(count($errors) !== 0){?>
-        <?php foreach($errors as $error){?>
-            <li class="err-msg"><?php print h($error);?></li>
-        <?php }?>
-    <?php }?>
-    </ul>
     <h2>登録済みスポット情報変更</h2>
     <p>スポット一覧</p>
     <table>
@@ -63,6 +87,8 @@
             <th>緯度</th>
             <th>経度</th>
             <th>コメント</th>
+            <th>タグ</th>
+            <th>ジャンル</th>
             <th>ステータス</th>
             <th>操作</th>
         </tr>
@@ -73,10 +99,12 @@
         <?php }else{?>
         <tr class='status_false'>
             <?php }?>
-            <td><img src="<?php print h('./spot_picture/'.$spot['image']); ?>"></td>
+            <td>
+                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
+            </td>
             <td><?php print h($spot['spot_name']); ?></td>
             <td><?php print h($spot['station_name']); ?></td>
-            <td><?php print h($spot['address']); ?></td>
+            <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
             <td><?php print h($spot['lat']); ?></td>
             <td><?php print h($spot['lng']); ?></td>
             <td>
@@ -84,13 +112,24 @@
                     <textarea name='update_comment' class='update_comment'>
                         <?php print h($spot['comment']); ?>
                     </textarea>
-                    <input type = "submit" value="変更">
+                    <input type="submit" value="変更">
                     <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
                     <input type="hidden" name="sql_kind" value="update_comment">
                 </form>
             </td>
-            
-            <!--tdの中にform-->
+            <?php
+                $link = get_db_connect();
+                $spot_tags = select_tags($link, $spot['spot_id']);
+                close_db_connect($link);
+            ?>
+            <td>
+                <ul>
+                    <?php foreach($spot_tags as $spot_tag){?>
+                        <li><?php print h($tags_name[$spot_tag['tag_id']]); ?></li>
+                    <?php }?>
+                </ul>
+            </td>
+            <td><?php print h($genres_name[$spot['genre']]); ?></td>
             <td>
                 <form method = "post">
                     <?php if($spot['status'] === '1'){?>
@@ -115,8 +154,50 @@
         </tr>
     <?php } ?>
     </table>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script>
-      function init(){
+    
+    // 郵便番号から住所を取得
+    $('#insert_address').click(setPrefecture);
+    function setPrefecture() {
+    var postal_code = $('#postal_code').val();
+
+    // ここでpostal_codeのバリデーションを行ってください
+
+    $.ajax({
+      type : 'get',
+      url : 'https://maps.googleapis.com/maps/api/geocode/json',
+      crossDomain : true,
+      dataType : 'json',
+      data : {
+        //keyをここに書く
+        key : '<?php echo API_KEY; ?>',
+        address : postal_code,
+        language : 'ja',
+        sensor : false
+      },
+      success : function(resp){
+        if(resp.status === "OK"){
+          // APIのレスポンスから住所情報を取得
+          var obj = resp.results[0].address_components;
+          if (obj.length < 5) {
+            alert('正しい郵便番号を入力してください');
+            return false;
+          }
+          //$('#country').val(obj[4]['long_name']); // 国
+          $('#prefecture').val(obj[3]['long_name']); // 都道府県
+          $('#city').val(obj[2]['long_name']);  // 市区町村
+          $('#detail_address').val(obj[1]['long_name']); // 番地
+        }else{
+            console.log(resp);
+          alert('住所情報が取得できませんでした');
+          return false;
+        }
+      }
+    });
+  }
+    
+    function init(){
         // ジオコーダーの生成
         var geocoder = new google.maps.Geocoder();
         document.getElementById('search')
@@ -129,7 +210,9 @@
                 // 第一引数にジオコーディングのオプションを設定
                 {
                 //addressに入れた住所を渡す
-                  address: document.getElementById('address').value
+                  address: document.getElementById('prefecture').value +
+                            document.getElementById('city').value +
+                            document.getElementById('detail_address').value
                 },
                 // 第二引数に結果取得時の動作を設定(resultに返ってきた結果、statusに成功か失敗か)
                 function(results, status){
