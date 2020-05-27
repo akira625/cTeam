@@ -39,9 +39,11 @@ close_db($link);
     <div class="content">
         <div id="main">
             <div id="left">
-                <div id="spot_name_box">
-                    <h2 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h2>
-                    <h1 class="spot_name"></h1>
+                <div class="name_flame">
+                    <div id="spot_name_box">
+                        <h2 class="station_name"><?php print h($stations_data[$rand_station_number]['station_name']); ?></h2>
+                        <h1 class="spot_name"></h1>
+                    </div>
                 </div>
                 <div class="test_flame">
                     <div class="test">
