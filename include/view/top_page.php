@@ -48,6 +48,6 @@ require_once '../cTeam/include/model/my_function.php';
             </div>
         </div>
     </div>
-    <a href="../../login.php" class="for-admin">管理者ページリンク</a>
+    <a href="../cTeam/login.php" class="for-admin">管理者ページリンク</a>
 </body>
 </html>

@@ -26,10 +26,8 @@ require_once './include/model/cteam_function.php';
     <div class="content">
         <div id="main">
             <div id="left">
-                <div class="name_flame">
-                    <div id="spot_name_box">
-                        <h1 class="spot_name"></h1>
-                    </div>
+                <div id="spot_name_box">
+                    <h1 class="spot_name"></h1>
                 </div>
                 <div class="test_flame">
                     <div class="test">
@@ -44,9 +42,9 @@ require_once './include/model/cteam_function.php';
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <button id="only_change_spot" class="btn-flat-logo" value="<?php print h($tag_id); ?>">スポットを選び直す</button>
+                        <button id="only_change_spot" value="<?php print h($tag_id); ?>">スポットだけ選び直す</button>
                         <form action="top_page.php" method="post">
-                            <button class="btn-flat-logo">TOPにもどる</button>
+                            <a href="top_page.php" class="btn-flat-logo"><i class="fa fa-chevron-right"></i>TOP</a>
                         </form>
                     </div>
                 </div>
