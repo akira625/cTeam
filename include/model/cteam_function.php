@@ -30,7 +30,7 @@ function get_station_table($link) {
 //スポット情報を取得関数
 //引数：$link
 //返り値：配列データ
-function get_spot_table($link, $tag_id) {
+function get_spot_table($link, $tag_id, $genre_id) {
     $sql = "SELECT 
                 spot_location_table.spot_id, spot_location_table.station_id, spot_location_table.lat, spot_location_table.lng, 
                 spot_location_table.postal_code, spot_location_table.prefecture, spot_location_table.city, spot_location_table.detail_address, 
@@ -41,7 +41,8 @@ function get_spot_table($link, $tag_id) {
             ON spot_location_table.spot_id = spot_info_table.spot_id
             JOIN tag_spot_table
             ON spot_info_table.spot_id = tag_spot_table.spot_id
-            WHERE tag_spot_table.tag_id = {$tag_id}";
+            WHERE tag_spot_table.tag_id = {$tag_id}
+            AND spot_info_table.genre = {$genre_id}";
     $spot_data = get_as_array($link, $sql);
     return $spot_data;
 }

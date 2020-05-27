@@ -79,5 +79,6 @@ require_once '../cTeam/include/model/my_function.php';
         </div>
     </div>
     <a href="../cTeam/login.php" class="for-admin">スポット追加はこちら</a>
+
 </body>
 </html>

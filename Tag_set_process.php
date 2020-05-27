@@ -30,4 +30,4 @@ if(count($errors) === 0){
     $_SESSION['tag_id'] = $tag_id;
 }
 
-// redirect(C_TEAM_VIEW_SPOT);
+redirect(C_TEAM_GENRE_PAGE);

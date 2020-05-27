@@ -1,0 +1,202 @@
+#main {
+  width: 800px;
+  
+}
+.genre_content {
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#top, #bottom {
+  width: 960px;
+  height: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left:200px;
+}
+.genre {
+  width: 150px;
+  height: 100px;
+}
+.genre {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 3px 3px 2px #666666;  /* 影の設定 */
+}
+
+#eat {
+  background    : #f5b1aa;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  height:100px;
+  width:150px;
+}
+#eat :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #f5b1aa;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#shopping {
+  background    : #fcd575;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  height:100px;
+  width:150px;
+}
+#shopping :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #fcd575;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#play {
+  background    : #a2d7dd;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  height:100px;
+  width:150px;
+}
+#play :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #a2d7dd;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#mind {
+  background    : #98d98e;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  height:100px;
+  width:150px;
+}
+#mind :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #98d98e;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#learn {
+  background    : #c0a2c7;     /* 背景色     */
+  margin-right:auto;
+  margin-left:auto;
+  height:100px;
+  width:150px;
+}
+#learn :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #c0a2c7;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+.button-eat {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+.button-shopping {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+.button-play {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+.button-mind {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+.button-learn {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+#eat2 {
+  background    : #f6bfbc;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:50px;
+}
+#eat2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #f6bfbc;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#shopping2 {
+  background    : #f8e58c;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:50px;
+}
+#shopping2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #f8e58c;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#play2 {
+  background    : #c1e4e9;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:50px;
+}
+#play2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #c1e4e9;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#mind2 {
+  background    : #badcad;     /* 背景色     */
+  margin-left:auto;
+  margin-right:75px;
+}
+#mind2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #badcad;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#learn2 {
+  background    : #e6cde3;     /* 背景色     */
+  margin-right:auto;
+  margin-left:70px;
+}
+#learn2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #e6cde3;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}

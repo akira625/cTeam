@@ -6,8 +6,12 @@ require_once './include/model/cteam_function.php';
 $link = connect_db();
 
 $tag_id = receive_post('tag_id');
+$genre_id = receive_post('genre_id');
+// $tag_id = 2;
+// $genre_id = 2;
+
 // var_dump($tag_id);
-$spot_data = get_spot_table($link, $tag_id);
+$spot_data = get_spot_table($link, $tag_id, $genre_id);
 close_db($link);
 $number_spots = count($spot_data);
 $rand_spot_number = mt_rand(1, $number_spots) - 1;
