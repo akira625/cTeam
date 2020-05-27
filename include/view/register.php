@@ -32,12 +32,12 @@
                     <input type="password" name="new_pass" placeholder="パスワード">
                 </div>
                 <div>
-                    性別:
-                    <input type="radio" name="gender" value="man">男
-                    <input type="radio" name="gender" value="woman">女
+                    <label>性別:</label>
+                    <input type="radio" name="gender" value="man"><label>男</label>
+                    <input type="radio" name="gender" value="woman"><label>女</label>
                 </div>
                 <div>
-                    生年月日:<br>
+                    <label>生年月日:</label><br>
                     <select name="year">
                     <option value="">-</option>
                     <option value="1900">1900</option>
@@ -160,7 +160,7 @@
                     <option value="2017">2017</option>
                     <option value="2018">2018</option>
                     <option value="2019">2019</option>
-                    </select>　年
+                    </select><label>年</label>
                     <select name="month">
                         <option value="">-</option>
                         <option value="1">1</option>
@@ -175,7 +175,7 @@
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
-                    </select>　月
+                    </select><label>月</label>
                     <select name="day">
                         <option value="">-</option>
                         <option value="1">1</option>
@@ -209,7 +209,7 @@
                         <option value="29">29</option>
                         <option value="30">30</option>
                         <option value="31">31</option>
-                    </select>　日
+                    </select><label>日</label>
                 </div>
                 <input type = "submit" value = "ユーザーを新規作成する">
                 <div class = "login-link">

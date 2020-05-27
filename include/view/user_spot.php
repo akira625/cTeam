@@ -114,7 +114,7 @@
                     <span class="userInsert-form">
                         <?php foreach($tags_name as $key => $value){?>
                         <input type="checkbox" name="tags[]" value="<?php print h($key);?>">
-                                <?php print h($value);?>
+                                <span class="select_tags"><?php print h($value);?></span>
                         <?php }?>
                     </span>
                 </div>

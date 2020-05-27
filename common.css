@@ -82,6 +82,18 @@ header {
   width: 960px;
 }
 
+.content label{
+  color: dimgray;
+}
+
+.content input[type="submit"]{
+  color: dimgray;
+}
+
+.content input[type="radio"]{
+  color: dimgray;
+}
+
 .success{
    font-size: 20px;
    color: #0000ff;
@@ -213,7 +225,7 @@ header {
   color: dimgray;
 }
 
-.userInsert input[type="checkbox"]{
+.select_tags{
   color: dimgray;
 }
 

@@ -17,8 +17,8 @@
         </div>
     </header>
     <div class = "content">
-        <p>スポット追加にはログインが必要です。</p>
         <div class = "login">
+        <p>スポット追加にはログインが必要です。</p>
             <form action = "login_process.php" method = "post">
             <div>
                 <input type="text" name="user_name" placeholder="ユーザー名">
@@ -29,7 +29,7 @@
             <input type = "submit" value = "ログイン">
             <?php if(count($errors) !== 0){?>
                 <?php foreach($errors as $error){?>
-                    <li class="err-msg"><?php print h($error);?></li>
+                    <li class="errors"><?php print h($error);?></li>
                 <?php }?>
             <?php }?>
             <div class = "account-create">
