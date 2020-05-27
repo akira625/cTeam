@@ -17,11 +17,12 @@
 //駅情報を取得関数
 //引数：$link
 //返り値：配列データ
-function get_station_table($link) {
+function get_station_table($link, $station_id) {
     $sql = "SELECT 
                 station_id, station_name,
                 lat, lng, address
-            FROM station_table";
+            FROM station_table
+            WHERE station_id = {$station_id}";
     $station_data = get_as_array($link, $sql);
     return $station_data;
     

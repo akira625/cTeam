@@ -221,7 +221,7 @@ function get_admin_item_list($link, $user_id) {
                    item_information_table.publication_status, stock_table.stock_quantity
             FROM item_information_table
             JOIN stock_table
-                ON item_information_table.item_id = stock_table.item_id";
+            ON item_information_table.item_id = stock_table.item_id";
     //SQLを実行し商品一覧を配列で取得
     $item_data = get_as_array($link, $sql);
     return $item_data;

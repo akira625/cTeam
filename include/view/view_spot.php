@@ -28,7 +28,7 @@ require_once './include/model/cteam_function.php';
             <div id="left">
                 <div class="name_flame">
                     <div id="spot_name_box">
-                        <h2 class="station_name"></h2>
+                        <!--<h2 class="station_name"><?php print h($station_name); ?></h2>-->
                         <h1 class="spot_name"></h1>
                     </div>
                 </div>
