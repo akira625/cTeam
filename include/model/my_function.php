@@ -204,7 +204,7 @@ function get_as_row($link, $sql) {
 //返り値：ユーザ名
 function get_user_name($link, $user_id) {
     
-    $sql = "SELECT user_name FROM user_table
+    $sql = "SELECT user_name FROM users_table
             WHERE user_id = {$user_id}";
     $user_name_data = get_as_row($link, $sql);
     return $user_name_data['user_name'];

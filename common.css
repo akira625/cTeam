@@ -23,6 +23,7 @@ time, mark, audio, video {
 
 h1{
   font-size: 25px;
+  color: dimgray;
 }
 
 ul {
@@ -35,6 +36,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+p,h2{
+  color: dimgray;
 }
 
 /* common -------------------------------------------- */
@@ -173,7 +178,7 @@ header {
 .userInsert label{
   display: table-cell;
   width: 200px;
-  background-color: #9932cc;
+  background-color: #c68eff;
   color: white;
   font-size: 16px;
   vertical-align: middle;
@@ -201,6 +206,15 @@ header {
   background-color: lightgray;
   border-bottom: solid 3px gray;
   border-right: solid 4px darkgray;
+  color: dimgray;
+}
+
+.userInsert input[type="file"]{
+  color: dimgray;
+}
+
+.userInsert input[type="checkbox"]{
+  color: dimgray;
 }
 
 .userInsert input[type="submit"]{
@@ -213,6 +227,7 @@ header {
   background-color: lightgray;
   border-bottom: solid 3px gray;
   border-right: solid 4px darkgray;
+  color: dimgray;
 }
 
 .userInsert select {
@@ -222,6 +237,7 @@ header {
   vertical-align: top;
   padding-left: 5px;
   box-sizing: border-box;
+  color: dimgray;
 }
 
 .userInsert input[type="text"] {
@@ -248,11 +264,13 @@ input[type="file"] {
 .user_spot_table th{
   height: 40px;
   vertical-align: middle;
+  color: dimgray;
 }
 
 .user_spot_table td{
   padding: 5px;
   vertical-align: middle;
+  color: dimgray;
 }
 
 .spot_img{
@@ -268,7 +286,7 @@ input[type="file"] {
 }
 
 table,td,th{
-   border: solid 1px black;
+   border: solid 1px dimgray;
 }
 img{
    width: 200px
@@ -421,7 +439,8 @@ img{
 .for-admin{
   display: block;
   margin: 0 auto;
-  width: 160px;
+  width: 170px;
+
   position: absolute;
   left: 63%;
 }
@@ -430,3 +449,21 @@ img{
   display: block;
   margin: 0 auto;
 }
+
+.menu {
+  float: right;
+  display:block;
+  margin: 15px 0 0 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+a:link.menu {
+  color: #ffffff;
+}
+
+a:visited.menu  {
+  color: #ffffff;
+}
+
