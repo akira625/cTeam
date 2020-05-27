@@ -14,6 +14,11 @@ $link = connect_db();
 $tag_id = receive_session('tag_id');
 // $tag_id = 2;
 $genre_id = receive_session('genre_id');
+// $genre_id = 5;
+if ($tag_id = 6) {
+    $tag_id = mt_rand(1, 5);
+    $genre_id = mt_rand(1,5);
+}
 var_dump($tag_id);
 var_dump($genre_id);
 
