@@ -127,12 +127,12 @@ function timestamp(){
     return date('Y-m-d H:i:s');
 }
 
-function insert_register($link, $new_user, $new_pass){
+function insert_register($link, $new_user, $new_pass, $gender, $birthdate){
     $log = timestamp();
     $sql = "INSERT 
                 users_table(user_name, password, gender, birthdate, created, updated)
             VALUES
-                ('{$new_user}','{$new_pass}','{$log}','{$log}')
+                ('{$new_user}','{$new_pass}','{$gender}','{$birthdate}','{$log}','{$log}')
             ";
     return execute_query($link, $sql);
 }
@@ -336,3 +336,16 @@ function get_user_id($link, $new_user){
             ";
     return get_as_row($link, $sql);
 }
+
+function preg_match_int($int){
+    return preg_match('/^([1-9][0-9]*|0)$/',$int);
+}
+
+function is_positive_num($int){
+    return preg_match('/^([1-9][0-9]*)$/',$int);
+}
+
+function is_valid_str($str, $int){
+    return preg_match('/^([a-zA-Z0-9]{'.$int.',})$/', $str) === 1;
+}
+

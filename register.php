@@ -9,8 +9,12 @@ $message = '';
 $errors = [];
 
 if(is_post() === TRUE){
-    $new_user = get_post_data('new_user');
-    $new_pass = get_post_data('new_pass');
+    $new_user = get_post('new_user');
+    $new_pass = get_post('new_pass');
+    $gender = get_post('gender');
+    $year = get_post('year');
+    $month = get_post('month');
+    $day = get_post('day');
     if(is_valid_str($new_user, 6) !== TRUE){
         $errors[] = 'ユーザー名は半角英数字6文字以上で入力してください。';
     }
@@ -18,6 +22,16 @@ if(is_post() === TRUE){
     if(is_valid_str($new_pass, 6) !== TRUE){
         $errors[] = 'パスワードは半角英数字6文字以上で入力してください。';
     }
+    
+    if($gender === ''){
+        $errors[] = '性別を選択してください。';
+    }
+    
+    if($year === '' || $month === '' || $day === ''){
+        $errors[] = '生年月日を入力してください。';
+    }
+    
+    $birthdate = $year.'-'.$month.'-'.$day;
 }
 
 
@@ -31,7 +45,7 @@ if(isset($user['user_id']) === TRUE && $user['user_id'] !== '1'){
 }
 
 if(is_post() === TRUE && count($errors) === 0){
-    if(insert_register($link, $new_user, $new_pass) === TRUE){
+    if(insert_register($link, $new_user, $new_pass, $gender, $birthdate) === TRUE){
         $message = "アカウント作成を完了しました。" ;
     }else{
         $errors[] = 'INSERT処理失敗'.$sql;
