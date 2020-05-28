@@ -29,11 +29,11 @@
             <td><?php print h($data['user_name']);?></td>
             <td><?php print h($data['gender']);?></td>
             <td><?php print h($data['birthdate']);?></td>
-            <td><?php print h($data['created_at']);?></td>
+            <td><?php print h($data['created']);?></td>
             <td>
                 <form method = "post">
                     <input type = "submit" name="delete" value="削除する">
-                    <input type = "hidden" name = "user_id" value = <?php print h($station['user_id']);?>>
+                    <input type = "hidden" name = "user_id" value = <?php print h($data['user_id']);?>>
                 </form>
             </td>
         </tr>

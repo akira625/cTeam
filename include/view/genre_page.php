@@ -1,3 +1,26 @@
+<?php
+require_once '../conf/const.php';
+require_once '../model/my_function.php';
+
+session_start();
+$link = connect_db();
+
+if(isset($_SESSION['user_id']) === TRUE) {
+    if($_SESSION['user_id'] === 'admin'){
+        $user_name = 'admin';
+    }else{
+        $user_id = $_SESSION['user_id'];
+        $user_name = get_user_name($link, $user_id);
+    }
+}else{
+    $user_name = '';
+}
+
+$errors = receive_errors();
+
+close_db($link);
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,8 +35,15 @@
             <a href = "../../top_page.php">
                 <img class = "logo" src="../../header-img/logo.png">
             </a>
-            <a href = "../../login.php">
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <a class = "menu" href = "../../logout.php">ログアウト</a>
+            <?php }?>
+            <a href = "./login.php">
                 <img class = "walk" src="../../header-img/walk.png">
+            </a>
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <p class = "menu">ユーザー名:<?php print h($user_name); ?></p>
+            <?php }?>
             </a>
         </div>
     </header>

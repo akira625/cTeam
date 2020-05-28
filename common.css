@@ -82,6 +82,18 @@ header {
   width: 960px;
 }
 
+.content label{
+  color: dimgray;
+}
+
+.content input[type="submit"]{
+  color: dimgray;
+}
+
+.content input[type="radio"]{
+  color: dimgray;
+}
+
 .success{
    font-size: 20px;
    color: #0000ff;
@@ -213,7 +225,7 @@ header {
   color: dimgray;
 }
 
-.userInsert input[type="checkbox"]{
+.select_tags{
   color: dimgray;
 }
 
@@ -281,8 +293,12 @@ input[type="file"] {
   width: 600px;
 }
 
-.comment{
-  width: 330px;
+.table_spot_name{
+  width: 170px;
+}
+
+.table_comment{
+  width: 270px;
 }
 
 table,td,th{
@@ -321,6 +337,7 @@ img{
 .btn_position3 {
   text-align: center;
   margin-top:60px;
+  margin-bottom:30px;
 }
 
 .btn {
@@ -437,13 +454,22 @@ img{
 }
 
 .for-admin{
-  display: block;
-  margin: 0 auto;
-  width: 170px;
-
-  position: absolute;
-  left: 63%;
+  position: relative;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #595455;
+  border: solid 2px #afafb0;
+  border-radius: 3px;
+  transition: .4s;
+  width:160px;
 }
+
+.for-admin:hover {
+  background: #afafb0;
+  color: white;
+}
+
 
 .introduce{
   display: block;

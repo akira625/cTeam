@@ -23,12 +23,16 @@ var_dump($tag_id);
 if($tag_id === ''){
     $_SESSION['errors'][] = 'タグを選んでください。';
     redirect(C_TEAM_TOP_PAGE);
+}else if ($tag_id === '6') {
+    $_SESSION['tag_id'] = $tag_id;
+    redirect(C_TEAM_VIEW_SPOT);
 }
 
 $errors = receive_errors();
 // エラーがなければセッションにIDを代入
 if(count($errors) === 0){
     $_SESSION['tag_id'] = $tag_id;
+    var_dump($_SESSION['tag_id']);
 }
-
+var_dump(receive_session('tag_id'));
 redirect(C_TEAM_GENRE_PAGE);

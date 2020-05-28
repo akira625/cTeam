@@ -18,8 +18,15 @@ require_once './include/model/cteam_function.php';
             <a href = "./top_page.php">
                 <img class = "logo" src="./header-img/logo.png">
             </a>
-            <a href = "./top_page.php">
-                <img class = "walk" src="./header-img/walk.png">
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <a class = "menu" href = "./logout.php">ログアウト</a>
+            <?php }?>
+            <a href = "./login.php">
+                <img class = "walk" src="../cTeam/header-img/walk.png">
+            </a>
+            <?php if (isset($_SESSION['user_id']) === TRUE){?>
+                <p class = "menu">ユーザー名:<?php print h($user_name); ?></p>
+            <?php }?>
             </a>
         </div>
     </header>
@@ -28,9 +35,11 @@ require_once './include/model/cteam_function.php';
             <div id="left">
                 <div class="name_flame">
                     <div id="spot_name_box">
-                        <!--<h2 class="station_name"></h2>-->
+
                         <h1 class="spot_name"></h1>
+                        <h2 class="station_name">最寄駅：<?php print h($station_name); ?></h2>
                         <!--<p><?php print $tag_name ?> × <?php print $genre ?></p>-->
+                      
                     </div>
                 </div>
                 <div class="test_flame">
@@ -67,6 +76,7 @@ require_once './include/model/cteam_function.php';
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+                $('.station_name').html('最寄駅：<?php print h($station_name); ?>');
             };
             function createMarker(lat, lng, name){
                 //マーカの作成
@@ -85,17 +95,28 @@ require_once './include/model/cteam_function.php';
                 map.panTo(new_position);
                 infoWindow.open(map, spot_marker); 
             }
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            };
             $(function() {
                 indicate_spot();
             });
             
             $(function() {
                 $('#only_change_spot').click(function(e) {
+                    var random_flag = <?php print h($random_flag); ?>;
+                    if(random_flag === 1){
+                        var tag_id = getRandomInt(5);
+                        var genre_id = getRandomInt(5);
+                        console.log(tag_id);
+                        console.log(genre_id);
+                    } else {
+                        var tag_id = $('#only_change_spot').val();
+                        var genre_id = <?php print h($genre_id); ?>;
+                        console.log(tag_id);
+                        console.log(genre_id);
+                    }
                     e.preventDefault();
-                    var tag_id = $('#only_change_spot').val();
-                    var genre_id = <?php print h($genre_id); ?>;
-                    console.log(tag_id);
-                    console.log(genre_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
                         type: 'POST',
@@ -108,10 +129,24 @@ require_once './include/model/cteam_function.php';
                         $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
-                        spot_marker.setMap(null);
-                        createMarker(data.lat, data.lng, data.spot_name);
+                        var station_id = data.station_id;
+                        $.ajax( {
+                            url: 'get_station_tag_genre_name.php',
+                            type: 'POST',
+                            data: {
+                                'station_id': station_id
+                                },
+                            dataType:'json'
+                        }).done(function(station_name){
+                            $('.station_name').html('最寄駅：' + station_name);
+                            spot_marker.setMap(null);
+                            createMarker(data.lat, data.lng, data.spot_name);
+                        }).fail(function(station_name){
+                            alert('json取得エラー(station_name)です');
+                            console.log(station_name);
+                        })
                     }).fail(function(data){
-                        alert('エラーです');
+                        alert('json取得エラーです');
                         console.log(data);
                     });
                 });
