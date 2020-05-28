@@ -220,7 +220,7 @@ if(is_post() === TRUE && count($errors) === 0){
     }
     
     if($sql_kind === 'delete'){
-        if(delete_spot($link, $spot_id) === TRUE){
+        if(delete_spot_location($link, $spot_id) === TRUE){
             $message = 'データを削除しました。';
         }else{
             $errors[] = 'delete処理失敗';
