@@ -126,16 +126,18 @@ require_once './include/model/cteam_function.php';
                         $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
-                        var station_id = data.station_id;
+                        var spot_id = data.spot_id;
                         $.ajax( {
                             url: 'get_station_tag_genre_name.php',
                             type: 'POST',
                             data: {
-                                'station_id': station_id
+                                'spot_id': spot_id
                                 },
                             dataType:'json'
-                        }).done(function(station_name){
-                            $('.station_name').html('最寄駅：' + station_name);
+                        }).done(function(station_tag_genre_name){
+                            $('.station_name').html('最寄駅：' + station_tag_genre_name.station_name);
+                            $('.genre_name').html('最寄駅：' + station_tag_genre_name.genre_name);
+                            $('.tag_name').html('最寄駅：' + station_tag_genre_name.tag_name);
                             spot_marker.setMap(null);
                             createMarker(data.lat, data.lng, data.spot_name);
                         }).fail(function(station_name){

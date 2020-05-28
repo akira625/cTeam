@@ -6,14 +6,14 @@ require_once './include/model/cteam_function.php';
 
 $link = connect_db();
 
-$station_id = receive_post('station_id');
-
-$station_info = get_station_table($link, $station_id);
-// var_dump($station_info);
-$station_name = $station_info[0]['station_name'];
+$spot_id = receive_post('spot_id');
+$spot_id = 25;
+var_dump($spot_id);
+$station_tag_genre_name = get_station_tag_genre_name($link, $spot_id);
+var_dump($station_tag_genre_name);
 close_db($link);
 
-$station_name_json = json_encode($station_name, JSON_UNESCAPED_UNICODE | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+$station_tag_genre_name_json = json_encode($station_tag_genre_name[0], JSON_UNESCAPED_UNICODE | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 // var_dump($station_name_json);
 
-print $station_name_json;
+print $station_tag_genre_name_json;

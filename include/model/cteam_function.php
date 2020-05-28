@@ -124,6 +124,8 @@ function get_station_tag_genre_name($link, $spot_id) {
             FROM spot_location_table
             JOIN spot_info_table
                 ON spot_location_table.spot_id = spot_info_table.spot_id
+            JOIN station_table
+                ON station_table.station_id = spot_location_table.station_id
             JOIN tag_spot_table
                 ON spot_info_table.spot_id = tag_spot_table.spot_id
             JOIN tag_table
@@ -131,6 +133,6 @@ function get_station_tag_genre_name($link, $spot_id) {
             JOIN genre_table
                 ON spot_info_table.genre = genre_table.genre_id
             WHERE spot_location_table.spot_id = {$spot_id}";
-    $genre_name = get_as_array($link, $sql);
-    return $genre_name;
+    $station_tag_genre_name = get_as_array($link, $sql);
+    return $station_tag_genre_name;
 }
