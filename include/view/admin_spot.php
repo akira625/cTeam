@@ -53,17 +53,17 @@
                 <textarea name='comment' class='comment'></textarea>
             </label><br>
             <label>タグ(複数選択可):
-                    <?php foreach($tags_name as $key => $value){?>
-                    <input type="checkbox" name="tags[]" value="<?php print h($key);?>">
-                            <?php print h($value);?>
+                    <?php foreach($all_tags as $tag_name){?>
+                    <input type="checkbox" name="tags[]" value="<?php print h($tag_name['tag_id']);?>">
+                            <?php print h($tag_name['tag_name']);?>
                     <?php }?>
             </label><br>
             <label>ジャンル(一つだけ選択):
                 <select name='genre'>
                     <option value=''>選択してください</option>
-                    <?php foreach($genres_name as $key => $value){?>
-                        <option value='<?php print h($key);?>'>
-                            <?php print h($value);?>
+                    <?php foreach($all_genres as $genre_name){?>
+                        <option value='<?php print h($genre_name['genre_id']);?>'>
+                            <?php print h($genre_name['genre_name']);?>
                         </option>
                     <?php }?>
                 </select>
@@ -99,14 +99,14 @@
         <?php }else{?>
         <tr class='status_false'>
             <?php }?>
-            <td>
-                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
-            </td>
-            <td><?php print h($spot['spot_name']); ?></td>
-            <td><?php print h($spot['station_name']); ?></td>
-            <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
-            <td><?php print h($spot['lat']); ?></td>
-            <td><?php print h($spot['lng']); ?></td>
+            <!--<td>-->
+            <!--    <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">-->
+            <!--</td>-->
+            <!--<td><?php print h($spot['spot_name']); ?></td>-->
+            <!--<td><?php print h($spot['station_name']); ?></td>-->
+            <!--<td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>-->
+            <!--<td><?php print h($spot['lat']); ?></td>-->
+            <!--<td><?php print h($spot['lng']); ?></td>-->
             <td>
                 <form method = "post">
                     <textarea name='update_comment' class='update_comment'>
@@ -119,17 +119,38 @@
             </td>
             <?php
                 $link = get_db_connect();
-                $spot_tags = select_tags($link, $spot['spot_id']);
+                //array_column ( 元の配列, 取り出したい配列のキー)
+                $spot_tags = array_column(select_tags($link, $spot['spot_id']), 'tag_id');
+                // var_dump($spot_tags);
                 close_db_connect($link);
             ?>
             <td>
-                <ul>
-                    <?php foreach($spot_tags as $spot_tag){?>
-                        <li><?php print h($tags_name[$spot_tag['tag_id']]); ?></li>
+                <form method = "post">
+                    <?php foreach($all_tags as $tag_name){?>
+                            <input type="checkbox" name="update_tags[]" value="<?php print h($tag_name['tag_id']);?>"
+                            <?php if(in_array($tag_name['tag_id'], $spot_tags)){print 'checked';} ?>>
+                            <?php print h($tag_name['tag_name']);?>
                     <?php }?>
-                </ul>
+                    <input type="hidden" name="sql_kind" value="update_tags">
+                    <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
+                    <input type="submit" value="変更">
+                </form>
             </td>
-            <td><?php print h($genres_name[$spot['genre']]); ?></td>
+            <td>
+                <form method = "post">
+                    <select name='update_genre'>
+                        <?php foreach($all_genres as $genre_name){?>
+                            <option value='<?php print h($genre_name['genre_id']);?>'
+                            <?php if($genre_name['genre_id'] === $spot['genre']){print 'selected';}?>>
+                                <?php print h($genre_name['genre_name']);?>
+                            </option>
+                        <?php }?>
+                    </select>
+                    <input type="hidden" name="sql_kind" value="update_genre">
+                    <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
+                    <input type="submit" value="変更">
+                </form>
+            </td>
             <td>
                 <form method = "post">
                     <?php if($spot['status'] === '1'){?>
