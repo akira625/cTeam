@@ -199,6 +199,7 @@ if(is_post() === TRUE && count($errors) === 0){
                 foreach($tags as $tag){
                     if(insert_tags($link, $tag, $spot_id) === TRUE){
                         $message = 'スポットを追加しました。';
+
                     }else{
                         $errors[] = '追加失敗.tag_spot_table';
                     }
@@ -260,7 +261,7 @@ if(is_post() === TRUE && count($errors) === 0){
     }
     
     if($sql_kind === 'delete'){
-        if(delete_spot($link, $spot_id) === TRUE){
+        if(delete_spot_location($link, $spot_id) === TRUE){
             $message = 'データを削除しました。';
         }else{
             $errors[] = 'delete処理失敗';
@@ -272,7 +273,7 @@ if(is_post() === TRUE && count($errors) === 0){
 
 $spots = select_spots($link);
 
-// var_dump($errors);
+// var_dump($spots);
 
 close_db_connect($link);
 

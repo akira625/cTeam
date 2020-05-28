@@ -158,6 +158,7 @@ if(is_post() === TRUE && count($errors) === 0){
                 foreach($tags as $tag){
                     if(insert_tags($link, $tag, $spot_id) === TRUE){
                         $message = 'スポットを追加しました。';
+
                     }else{
                         $errors[] = '追加失敗.tag_spot_table';
                     }

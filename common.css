@@ -46,14 +46,29 @@ p,h2{
 
 body {
   font-family: sans-serif;
-  background-color: #fdeff2;
+  background-color: #e0efff;
   height: 100%;
   min-width: 960px;
 }
 
 header {
   height: 60px;
+  background-color: #7fbfff;
+}
+.cute {
   background-color: #f4b3c2;
+}
+.delicious {
+  background-color: #ee827c;
+}
+.enjoy {
+  background-color: #f7b977;
+}
+.beautiful {
+  background-color: #a2d7dd;
+}
+.nostalgic {
+  background-color: #c0a2c7;
 }
 
 .header-box {
@@ -336,7 +351,7 @@ img{
 
 .btn_position3 {
   text-align: center;
-  margin-top:60px;
+  margin-top:50px;
   margin-bottom:30px;
 }
 
@@ -375,7 +390,7 @@ img{
 .btn5 {
   background: #c0a2c7;/*ボタン色*/
   border-bottom: solid 4px #dbd0e6;
-  margin-right: 15px;
+  /*margin-right: 15px;*/
 }
 .btn6 {
   background: #d8e698;
