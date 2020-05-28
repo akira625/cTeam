@@ -236,20 +236,25 @@ function select_tags($link, $spot_id){
 
 // かわいい→$tags[$tag_id]にしたい
 
-function delete_spot($link, $spot_id){
+function delete_spot_location($link, $spot_id){
     $sql = "DELETE 
-                slt, sit
+                slt, sit, tst
             FROM
                 spot_location_table AS slt
             INNER JOIN 
                 spot_info_table AS sit
             ON
                 slt.spot_id = sit.spot_id
+            INNER JOIN 
+                tag_spot_table AS tst
+            ON
+                slt.spot_id = tst.spot_id
             WHERE 
                 slt.spot_id = '{$spot_id}'
             ";
     return execute_query($link, $sql);
 }
+
 
 ///station関連///////////////////////////////////////////////////
 
