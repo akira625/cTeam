@@ -111,11 +111,14 @@ require_once './include/model/cteam_function.php';
                         var genre_id = getRandomInt(5);
                         console.log(tag_id);
                         console.log(genre_id);
+                        console.log(random_genre_flag);
                     } else if(random_tag_flag === 0 && random_genre_flag === 1){
-                        var tag_id = $('#only_change_spot').val();
+                        var tag_id = <?php print h($tag_id); ?>;
                         var genre_id = getRandomInt(5);
+                        var tag_name = '<?php print h($tag_name); ?>';
                         console.log(tag_id);
                         console.log(genre_id);
+                        console.log(tag_name);
                     } else {
                         var tag_id = $('#only_change_spot').val();
                         var genre_id = <?php print h($genre_id); ?>;
@@ -145,8 +148,13 @@ require_once './include/model/cteam_function.php';
                             dataType:'json'
                         }).done(function(station_tag_genre_name){
                             $('.station_name').html('最寄駅：' + station_tag_genre_name.station_name);
-                            $('.genre_name').html(station_tag_genre_name.genre_name);
-                            $('.tag_name').html(station_tag_genre_name.tag_name);
+                            if(random_genre_flag === 1){
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(tag_name);
+                            } else {
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(station_tag_genre_name.tag_name);
+                            }
                             spot_marker.setMap(null);
                             createMarker(data.lat, data.lng, data.spot_name);
                         }).fail(function(station_name){
