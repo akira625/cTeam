@@ -91,6 +91,18 @@
   color         : #c0a2c7;     /* 背景色     */
   background    : #ffffff;     /* 文字色     */
 }
+#nothing {
+  background    : #b3ada0;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+  height:100px;
+  width:150px;
+}
+#nothing :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #b3ada0;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
 
 .button-eat {
   display       : inline-block;
@@ -137,6 +149,17 @@
 }
 
 .button-learn {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  color         : #ffffff;     /* 文字色     */
+  transition    : .3s;         /* なめらか変化 */
+}
+
+.button-nothing {
   display       : inline-block;
   border-radius : 5%;          /* 角丸       */
   font-size     : 18pt;        /* 文字サイズ */
@@ -198,5 +221,15 @@
 #learn2 :hover {
   box-shadow    : none;        /* カーソル時の影消去 */
   color         : #e6cde3;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+#nothing2 {
+  background    : #e6eae3;     /* 背景色     */
+  margin-left:auto;
+  margin-right:auto;
+}
+#nothing2 :hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #e6eae3;     /* 背景色     */
   background    : #ffffff;     /* 文字色     */
 }

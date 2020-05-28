@@ -82,6 +82,12 @@ close_db($link);
                         <input type="hidden" name="genre_id" value="5">
                     </form>
                 </div>
+                <div id="nothing2" class="genre">
+                    <form action="../../Genre_set_process.php" method="post">
+                        <input type="submit" value="ランダム" id="nothing" class="button-nothing">
+                        <input type="hidden" name="genre_id" value="6">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
