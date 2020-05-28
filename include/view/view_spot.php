@@ -68,6 +68,19 @@ require_once './include/model/cteam_function.php';
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
     <script>
         function init(){
+            var check_tag = <?php print h($tag_id); ?>;
+            if(check_tag === 1){
+                $('header').addClass('cute');
+            } else if(check_tag === 2){
+                $('header').addClass('delicious');
+            } else if(check_tag === 3){
+                $('header').addClass('enjoy');
+            } else if(check_tag === 4){
+                $('header').addClass('beautiful');
+            } else if(check_tag === 5){
+                $('header').addClass('nostalgic');
+            }
+            
             var random_spot = {
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>

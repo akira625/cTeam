@@ -55,6 +55,21 @@ header {
   height: 60px;
   background-color: #f4b3c2;
 }
+.cute {
+  background-color: #f4b3c2;
+}
+.delicious {
+  background-color: #00bfff;
+}
+.enjoy {
+  background-color: #00fa9a;
+}
+.beautiful {
+  background-color: #f5f5dc;
+}
+.nostalgic {
+  background-color: #00ced1;
+}
 
 .header-box {
   margin-left : auto ;
