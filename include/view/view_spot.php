@@ -128,7 +128,7 @@ require_once './include/model/cteam_function.php';
                         $('.spot_name').html(data.spot_name);
                         var station_id = data.station_id;
                         $.ajax( {
-                            url: 'get_station_name.php',
+                            url: 'get_station_tag_genre_name.php',
                             type: 'POST',
                             data: {
                                 'station_id': station_id
