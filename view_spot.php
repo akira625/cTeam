@@ -41,17 +41,15 @@ $rand_spot_number = mt_rand(1, $number_spots) - 1;
 
 $station_id = $spot_data[$rand_spot_number]['station_id'];
 $station_info = get_station_table($link, $station_id);
-// var_dump($station_info);
 $station_name = $station_info[0]['station_name'];
 // var_dump($station_name);
-// $spot_id = $spot_data[$rand_spot_number]['spot_id'];
-// var_dump($spot_id);
+
 $tag_name_arrry = get_tag_name_by_ti($link, $tag_id);
 $tag_name = $tag_name_arrry[0]['tag_name'];
-var_dump($tag_name);
+// var_dump($tag_name);
 $genre_name_array =get_genre_name_by_gi($link, $genre_id);
 $genre_name = $genre_name_array[0]['genre_name'];
-var_dump($genre_name);
+// var_dump($genre_name);
 close_db($link);
 
 include_once 'include/view/view_spot.php';

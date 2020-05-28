@@ -36,9 +36,9 @@ require_once './include/model/cteam_function.php';
                 <div class="name_flame">
                     <div id="spot_name_box">
 
-                        <h1 class="spot_name"></h1>
-                        <h2 class="station_name">最寄駅：<?php print h($station_name); ?></h2>
-                        <p><span class="tag_name"><?php print h($tag_name); ?></span> × <span class="genre_name"><?php print h($genre_name); ?></span></p>
+                        <h1 class="spot_name" style="padding-left: 6px;"></h1>
+                        <h2 class="station_name" style="padding-left: 6px;">最寄駅：<?php print h($station_name); ?></h2>
+                        <p><span class="tag_name" style="padding-left: 6px;"><?php print h($tag_name); ?></span> × <span class="genre_name"><?php print h($genre_name); ?></span></p>
                       
                     </div>
                 </div>
