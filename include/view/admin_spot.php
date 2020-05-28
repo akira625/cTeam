@@ -99,14 +99,14 @@
         <?php }else{?>
         <tr class='status_false'>
             <?php }?>
-            <!--<td>-->
-            <!--    <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">-->
-            <!--</td>-->
-            <!--<td><?php print h($spot['spot_name']); ?></td>-->
-            <!--<td><?php print h($spot['station_name']); ?></td>-->
-            <!--<td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>-->
-            <!--<td><?php print h($spot['lat']); ?></td>-->
-            <!--<td><?php print h($spot['lng']); ?></td>-->
+            <td>
+                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
+            </td>
+            <td><?php print h($spot['spot_name']); ?></td>
+            <td><?php print h($spot['station_name']); ?></td>
+            <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
+            <td><?php print h($spot['lat']); ?></td>
+            <td><?php print h($spot['lng']); ?></td>
             <td>
                 <form method = "post">
                     <textarea name='update_comment' class='update_comment'>
