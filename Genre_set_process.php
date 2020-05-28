@@ -6,10 +6,8 @@ require_once './include/model/cteam_function.php';
 
 session_start();
 
-session_start();
 $link = connect_db();
 
-session_start();
 
 if(isset($_SESSION['user_id']) === TRUE) {
     if($_SESSION['user_id'] === 'admin'){
@@ -51,5 +49,6 @@ if(count($errors) === 0){
     $_SESSION["genre_id"] = $genre_id;
     var_dump($_SESSION["genre_id"]);
 }
+var_dump(receive_session('genre_id'));
 
 redirect(C_TEAM_VIEW_SPOT);
