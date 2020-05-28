@@ -185,7 +185,8 @@ if(is_post() === TRUE && count($errors) === 0){
         start_transaction($link);
         
         if(insert_spotsLocation($link, $station_id, $lat, $lng, $postal_code, $prefecture, $city, $detail_address) === TRUE){
-            $spot_id = mysqli_insert_id();
+            $spot_id = mysqli_insert_id($link);
+            var_dump($spot_id);
             if(insert_spotsInfo($link, $spot_id, $spot_name, $status, $filename, $genre, $comment) === TRUE){
                 if(insert_tags($link, $tags, $spot_id) === TRUE){
                     $message = 'スポットを追加しました。';
@@ -230,7 +231,7 @@ if(is_post() === TRUE && count($errors) === 0){
 
 $spots = select_spots($link);
 
-// var_dump($errors);
+// var_dump($spots);
 
 close_db_connect($link);
 
