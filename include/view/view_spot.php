@@ -38,7 +38,7 @@ require_once './include/model/cteam_function.php';
 
                         <h1 class="spot_name"></h1>
                         <h2 class="station_name">最寄駅：<?php print h($station_name); ?></h2>
-                        <!--<p><?php print $tag_name ?> × <?php print $genre ?></p>-->
+                        <p><span class="tag_name"><?php print h($tag_name); ?></span> × <span class="genre_name"><?php print h($genre_name); ?></span></p>
                       
                     </div>
                 </div>
