@@ -120,7 +120,7 @@ function get_genre_name($link, $genre_id) {
 function get_station_tag_genre_name($link, $spot_id) {
     $sql = "SELECT 
                 spot_location_table.spot_id, station_table.station_name,
-                tag_table.tag_name, genre_table.genre_name
+                tag_table.tag_id, tag_table.tag_name, genre_table.genre_name
             FROM spot_location_table
             JOIN spot_info_table
                 ON spot_location_table.spot_id = spot_info_table.spot_id

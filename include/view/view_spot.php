@@ -35,11 +35,9 @@ require_once './include/model/cteam_function.php';
             <div id="left">
                 <div class="name_flame">
                     <div id="spot_name_box">
-
                         <h1 class="spot_name" style="padding-left: 6px;"></h1>
                         <h2 class="station_name" style="padding-left: 6px;">最寄駅：<?php print h($station_name); ?></h2>
                         <p><span class="tag_name" style="padding-left: 6px;"><?php print h($tag_name); ?></span> × <span class="genre_name"><?php print h($genre_name); ?></span></p>
-                      
                     </div>
                 </div>
                 <div class="test_flame">
@@ -167,6 +165,20 @@ require_once './include/model/cteam_function.php';
                             } else {
                                 $('.genre_name').html(station_tag_genre_name.genre_name);
                                 $('.tag_name').html(station_tag_genre_name.tag_name);
+                                check_tag = station_tag_genre_name.tag_id;
+                                console.log(check_tag);
+                                $('header').removeClass();
+                                if(check_tag === '1'){
+                                    $('header').addClass('cute');
+                                } else if(check_tag === '2'){
+                                    $('header').addClass('delicious');
+                                } else if(check_tag === '3'){
+                                    $('header').addClass('enjoy');
+                                } else if(check_tag === '4'){
+                                    $('header').addClass('beautiful');
+                                } else if(check_tag === '5'){
+                                    $('header').addClass('nostalgic');
+                                }
                             }
                             spot_marker.setMap(null);
                             createMarker(data.lat, data.lng, data.spot_name);
