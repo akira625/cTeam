@@ -3,8 +3,6 @@
 define('TAX', 1.05);  // 消費税
 
 define('DB_HOST',   'localhost'); // データベースのホスト名又はIPアドレス
-
-
 define('DB_USER',   'codecamp34620');  // MySQLのユーザ名
 define('DB_PASSWORD', 'codecamp34620');    // MySQLのパスワード
 define('DB_NAME',   'codecamp34620');    // データベース名

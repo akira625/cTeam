@@ -13,20 +13,7 @@ if(isset($_SESSION['user_id']) === TRUE) {
 $message     = '';     
 $errors     = [];     // エラーメッセージ
 $filename = '';
-$tags_name = [
-'1' => 'かわいい',
-'2' => 'おいしい',
-'3' => 'たのしい',
-'4' => 'きれい',
-'5' => 'なつかしい'
-];
-$genres_name = [
-'1' => '食べる',
-'2' => '買う',
-'3' => '遊ぶ',
-'4' => '癒し',
-'5' => '学ぶ・知る'
-];
+
 
 $sql_kind = get_post('sql_kind');
 
@@ -150,6 +137,26 @@ if($sql_kind === 'update_comment'){
     }
 }
 
+if($sql_kind === 'update_tags'){
+    $update_tags = get_post('update_tags');
+    $spot_id = get_post('spot_id');
+    
+    if($update_tags === []){
+        $errors[] = 'タグを選択してください。';
+    }
+
+}
+
+if($sql_kind === 'update_genre'){
+    $update_genre = get_post('update_genre');
+    $spot_id = get_post('spot_id');
+    
+        
+    if($update_genre === ''){
+        $errors[] = 'ジャンルを選択してください。';
+    }
+}
+
 if($sql_kind === 'update_status'){
     $status = get_post('status');
     $spot_id = get_post('spot_id');
@@ -172,7 +179,9 @@ if($sql_kind === 'delete'){
 
 // コネクション取得
 $link= get_db_connect();
-   
+
+$all_tags = select_all_tags($link);
+$all_genres = select_all_genres($link);
 $stations = select_stations($link);
 
    //ポスト確認とエラーチェックはリクエストメソッドの前に終わらせておく！！！
@@ -189,7 +198,8 @@ if(is_post() === TRUE && count($errors) === 0){
             if(insert_spotsInfo($link, $spot_id, $spot_name, $status, $filename, $genre, $comment) === TRUE){
                 foreach($tags as $tag){
                     if(insert_tags($link, $tag, $spot_id) === TRUE){
-                        $message = 'スポットを追加しました';
+                        $message = 'スポットを追加しました。';
+
                     }else{
                         $errors[] = '追加失敗.tag_spot_table';
                     }
@@ -210,6 +220,37 @@ if(is_post() === TRUE && count($errors) === 0){
             $errors[] = 'UPDATE処理失敗'.$sql;
         }
     }
+    
+    if($sql_kind === 'update_tags'){
+        $spot_tags = array_column(select_tags($link, $spot_id), 'tag_id');
+        if($update_tags !== $spot_tags){
+            foreach($update_tags as $update_tag){
+                if(update_tags1($link, $spot_tags, $update_tag, $spot_id) !== FALSE){
+                    foreach($spot_tags as $spot_tag){
+                        if(update_tags2($link, $spot_tag, $update_tags, $spot_id) !== FALSE){
+                            $message = 'タグを変更しました。';
+                        }else{
+                            $errors[] = 'UPDATE処理失敗:delete';
+                        }
+                    }
+                }else{
+                    $errors[] = 'UPDATE処理失敗:delete';
+                }
+            }
+        }else{
+            $errors[] = 'タグが変更されていません';
+        }
+
+    }
+
+    if($sql_kind === 'update_genre'){
+        if(update_genre($link, $spot_id, $update_genre) === TRUE){
+         $message = 'ジャンルを変更しました。';
+        }else{
+            $errors[] = 'UPDATE処理失敗';
+        }
+    }
+
     
     if($sql_kind === 'update_status'){
         if(update_status($link, $spot_id,$status) === TRUE){

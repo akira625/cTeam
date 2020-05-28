@@ -20,7 +20,23 @@ function close_db_connect($link) {
     mysqli_close($link);
 }
 
-function get_as_array($link, $sql) {
+function get_as_array($link, $sql){
+    // 返却用配列
+    $data = [];
+
+    // クエリを実行する
+    if ($result = mysqli_query($link, $sql)) {
+        // １件ずつ取り出す
+        while ($row = mysqli_fetch_array($result)) {
+            $data[] = $row;
+        }
+        // 結果セットを開放
+        mysqli_free_result($result);
+    }
+    return $data;
+}
+
+function get_as_assoc($link, $sql) {
 
     // 返却用配列
     $data = [];
@@ -170,7 +186,6 @@ function insert_spotsInfo($link, $spot_id, $spot_name, $status,
 }
 
 function insert_tags($link, $tag, $spot_id){
-
         $sql = "INSERT INTO 
                     tag_spot_table
                     (tag_id, spot_id)
@@ -191,6 +206,18 @@ function update_comment($link, $spot_id,$update_comment){
     return execute_query($link, $sql);
 }
 
+function update_genre($link, $spot_id, $update_genre){
+    $log = timestamp();
+    $sql = "UPDATE
+                spot_info_table
+            SET
+                genre = '{$update_genre}',updated = '{$log}'
+            WHERE
+                spot_id = '{$spot_id}'
+            ";
+    return execute_query($link, $sql);
+}
+
 function update_status($link, $spot_id,$status){
     $log = timestamp();
     $sql = "UPDATE
@@ -201,7 +228,41 @@ function update_status($link, $spot_id,$status){
                 spot_id = '{$spot_id}'
             ";
     return execute_query($link, $sql);
-    var_dump($sql);
+}
+
+// function update_tags($link, $spot_tags, $update_tags, $spot_id){
+//     foreach($update_tags as $update_tag){
+//         if(update_tags1($link, $spot_tags, $update_tag, $spot_id) !== FALSE){
+//             foreach($spot_tags as $spot_tag){
+//                 return update_tags2($link, $spot_tag, $update_tags, $spot_id);
+//             }
+//         }
+//     }
+// }
+
+function update_tags1($link, $spot_tags, $update_tag, $spot_id){
+    if(in_array($update_tag, $spot_tags) === false){
+        $sql = "INSERT INTO
+                    tag_spot_table(tag_id, spot_id)
+                VALUES
+                    ({$update_tag}, {$spot_id})
+                ";
+        return execute_query($link, $sql);
+    }
+}
+
+function update_tags2($link, $spot_tag, $update_tags, $spot_id){
+    
+    if(in_array($spot_tag, $update_tags) === false){
+        $sql = "DELETE FROM
+                    tag_spot_table
+                WHERE
+                    spot_id = {$spot_id}
+                AND
+                    tag_id = {$spot_tag}
+                ";
+        return execute_query($link, $sql);
+    }
 }
 
 function select_spots($link){
@@ -220,7 +281,7 @@ function select_spots($link){
             ON
                 slt.spot_id = sit.spot_id
             ";
-    return get_as_array($link, $sql);
+    return get_as_assoc($link, $sql);
 }
 
 function select_tags($link, $spot_id){
@@ -229,11 +290,29 @@ function select_tags($link, $spot_id){
             FROM
                 tag_spot_table
             WHERE
-                spot_id = '{$spot_id}'
+                spot_id = {$spot_id}
             ";
-    return get_as_array($link, $sql);
+    return get_as_assoc($link, $sql);
 }
 
+
+function select_all_tags($link){
+    $sql = "SELECT
+                tag_id, tag_name
+            FROM
+                tag_table
+            ";
+    return get_as_assoc($link, $sql);
+}
+
+function select_all_genres($link){
+    $sql = "SELECT
+                genre_id, genre_name
+            FROM
+                genre_table
+            ";
+    return get_as_assoc($link, $sql);
+}
 // かわいい→$tags[$tag_id]にしたい
 
 function delete_spot_location($link, $spot_id){
@@ -275,7 +354,7 @@ function select_stations($link){
             FROM
                 station_table 
             ";
-    return get_as_array($link, $sql);
+    return get_as_assoc($link, $sql);
 }
 
 function delete_station($link, $station_id){
@@ -302,7 +381,7 @@ function select_user($link){
             FROM
                 users_table
             ";
-    return get_as_array($link, $sql);
+    return get_as_assoc($link, $sql);
 }
 
 function delete_user($link, $user_id){
