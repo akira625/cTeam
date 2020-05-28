@@ -30,8 +30,8 @@ if ($tag_id = 6) {
     $tag_id = mt_rand(1, 5);
     $genre_id = mt_rand(1,5);
 }
-var_dump($tag_id);
-var_dump($genre_id);
+// var_dump($tag_id);
+// var_dump($genre_id);
 
 $spot_data = get_spot_table($link, $tag_id, $genre_id);
 close_db($link);
