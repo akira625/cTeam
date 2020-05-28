@@ -169,8 +169,8 @@ function insert_spotsInfo($link, $spot_id, $spot_name, $status,
     return execute_query($link, $sql);
 }
 
-function insert_tags($link, $tags, $spot_id){
-    foreach($tags as $tag){
+function insert_tags($link, $tag, $spot_id){
+
         $sql = "INSERT INTO 
                     tag_spot_table
                     (tag_id, spot_id)
@@ -178,7 +178,6 @@ function insert_tags($link, $tags, $spot_id){
                     ('{$tag}', '{$spot_id}')
                 ";
         return execute_query($link, $sql);
-    }
 }
 
 function update_comment($link, $spot_id,$update_comment){
@@ -237,20 +236,25 @@ function select_tags($link, $spot_id){
 
 // かわいい→$tags[$tag_id]にしたい
 
-function delete_spot($link, $spot_id){
+function delete_spot_location($link, $spot_id){
     $sql = "DELETE 
-                slt, sit
+                slt, sit, tst
             FROM
                 spot_location_table AS slt
             INNER JOIN 
                 spot_info_table AS sit
             ON
                 slt.spot_id = sit.spot_id
+            INNER JOIN 
+                tag_spot_table AS tst
+            ON
+                slt.spot_id = tst.spot_id
             WHERE 
                 slt.spot_id = '{$spot_id}'
             ";
     return execute_query($link, $sql);
 }
+
 
 ///station関連///////////////////////////////////////////////////
 
@@ -294,7 +298,7 @@ function lng_check($int){
 ///user関連///////////////////////////////////////////////////////
 function select_user($link){
     $sql = "SELECT
-                user_name, created_at
+                user_id, user_name, gender, birthdate, created
             FROM
                 users_table
             ";
