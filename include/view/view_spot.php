@@ -35,8 +35,11 @@ require_once './include/model/cteam_function.php';
             <div id="left">
                 <div class="name_flame">
                     <div id="spot_name_box">
+
                         <h1 class="spot_name"></h1>
                         <h2 class="station_name">最寄駅：<?php print h($station_name); ?></h2>
+                        <!--<p><?php print $tag_name ?> × <?php print $genre ?></p>-->
+                      
                     </div>
                 </div>
                 <div class="test_flame">
@@ -52,9 +55,9 @@ require_once './include/model/cteam_function.php';
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <button id="only_change_spot" class="btn-flat-logo" value="<?php print h($tag_id); ?>">スポットをかえる</button>
+                        <button id="only_change_spot" class="btn-flat-logo1" value="<?php print h($tag_id); ?>">スポットをかえる</button>
                         <form action="top_page.php" method="post">
-                            <button class="btn-flat-logo">TOPにもどる</button>
+                            <button class="btn-flat-logo2">TOPにもどる</button>
                         </form>
                     </div>
                 </div>
