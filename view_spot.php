@@ -24,12 +24,17 @@ $genre_id = receive_session('genre_id');
 // var_dump($tag_id);
 // var_dump($genre_id);
 // $genre_id = 5;
-$random_flag = 0;
+$random_tag_flag = 0;
+$random_genre_flag = 0;
 if ($tag_id === '6') {
     // var_dump($tag_id);
     $tag_id = mt_rand(1, 5);
     $genre_id = mt_rand(1,5);
-    $random_flag = 1;
+    $random_tag_flag = 1;
+}
+if ($genre_id === '6') {
+    $genre_id = mt_rand(1,5);
+    $random_genre_flag = 1;
 }
 // var_dump($tag_id);
 // var_dump($genre_id);

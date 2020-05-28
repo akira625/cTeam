@@ -104,9 +104,15 @@ require_once './include/model/cteam_function.php';
             
             $(function() {
                 $('#only_change_spot').click(function(e) {
-                    var random_flag = <?php print h($random_flag); ?>;
-                    if(random_flag === 1){
+                    var random_tag_flag = <?php print h($random_tag_flag); ?>;
+                    var random_genre_flag = <?php print h($random_genre_flag); ?>;
+                    if(random_tag_flag === 1 && random_genre_flag === 0){
                         var tag_id = getRandomInt(5);
+                        var genre_id = getRandomInt(5);
+                        console.log(tag_id);
+                        console.log(genre_id);
+                    } else if(random_tag_flag === 0 && random_genre_flag === 1){
+                        var tag_id = $('#only_change_spot').val();
                         var genre_id = getRandomInt(5);
                         console.log(tag_id);
                         console.log(genre_id);
