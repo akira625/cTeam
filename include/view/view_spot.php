@@ -136,12 +136,12 @@ require_once './include/model/cteam_function.php';
                             dataType:'json'
                         }).done(function(station_tag_genre_name){
                             $('.station_name').html('最寄駅：' + station_tag_genre_name.station_name);
-                            $('.genre_name').html('最寄駅：' + station_tag_genre_name.genre_name);
-                            $('.tag_name').html('最寄駅：' + station_tag_genre_name.tag_name);
+                            $('.genre_name').html(station_tag_genre_name.genre_name);
+                            $('.tag_name').html(station_tag_genre_name.tag_name);
                             spot_marker.setMap(null);
                             createMarker(data.lat, data.lng, data.spot_name);
                         }).fail(function(station_name){
-                            alert('json取得エラー(station_name)です');
+                            alert('json取得エラー(station_tag_genre_name)です');
                             console.log(station_name);
                         })
                     }).fail(function(data){
