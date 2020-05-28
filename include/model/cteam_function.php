@@ -28,6 +28,20 @@ function get_station_table($link, $station_id) {
     
 }
 
+//駅名を取得関数
+//引数：$link,$spot_id
+//返り値：配列データ
+function get_station_name($link, $spot_id) {
+    $sql = "SELECT station_table.station_name　
+            FROM spot_location_table 
+            JOIN station_table
+            ON　spot_location_table.station_id = station_table.station_id
+            WHERE spot_location_table.spot_id = {$spot_id}";
+    $station_name = get_as_array($link, $sql);
+    return $station_name;
+    
+}
+
 //スポット情報を取得関数
 //引数：$link
 //返り値：配列データ
@@ -48,5 +62,28 @@ function get_spot_table($link, $tag_id, $genre_id) {
     return $spot_data;
 }
 
+//タグ名を取得関数
+//引数：$link,$spot_id
+//返り値：配列データ
+function get_tag_name($link, $tag_id) {
+    $sql = "SELECT station_table.station_name　
+            FROM spot_location_table 
+            JOIN station_table
+            ON　spot_location_table.station_id = station_table.station_id
+            WHERE spot_location_table.spot_id = {$spot_id}";
+    $tag_name = get_as_array($link, $sql);
+    return $tag_name;
+}
 
-
+//ジャンル名を取得関数
+//引数：$link,$spot_id
+//返り値：配列データ
+function get_genre_name($link, $genre_id) {
+    $sql = "SELECT station_table.station_name　
+            FROM spot_location_table 
+            JOIN station_table
+            ON　spot_location_table.station_id = station_table.station_id
+            WHERE spot_location_table.spot_id = {$spot_id}";
+    $tag_name = get_as_array($link, $sql);
+    return $tag_name;
+}

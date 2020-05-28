@@ -17,10 +17,6 @@ if(isset($_SESSION['user_id']) === TRUE) {
     $user_name = '';
 }
 
-// $stations_data = get_station_table($link);
-// $number_stations = count($stations_data);
-// $rand_station_number = mt_rand(1, $number_stations) - 1;
-// $station_id = $stations_data[$rand_station_number]['station_id'];
 
 $tag_id = receive_session('tag_id');
 // $tag_id = 2;
@@ -34,27 +30,11 @@ if ($tag_id = 6) {
 // var_dump($genre_id);
 
 $spot_data = get_spot_table($link, $tag_id, $genre_id);
-close_db($link);
 $number_spots = count($spot_data);
 $rand_spot_number = mt_rand(1, $number_spots) - 1;
 
-// $station_id = $spot_data[$rand_spot_number]['station_id'];
-// $stations_data = get_station_table($link, $station_id);
-// var_dump($stations_data);
-// $number_stations = count($stations_data);
-// $rand_station_number = mt_rand(1, $number_stations) - 1;
-// $station_name = $stations_data['station_name'];
+$stations_id = $spot_data[$rand_spot_number]['station_id'];
+$stations_name = get_station_table($link, $station_id);
+close_db($link);
 
 include_once 'include/view/view_spot.php';
-
-// $link = connect_db();
-
-// $stations_data = get_station_table($link);
-// $number_stations = count($stations_data);
-// $rand_station_number = mt_rand(1, $number_stations) - 1;
-// $station_id = $stations_data[$rand_station_number]['station_id'];
-
-// $spot_data = get_spot_table($link, $station_id);
-// close_db($link);
-// $number_spots = count($spot_data);
-// $rand_spot_number = mt_rand(1, $number_spots) - 1;
