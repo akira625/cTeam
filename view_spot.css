@@ -14,15 +14,15 @@ h2 {
     background-image: url("./background_pic/view_spot_css.jpg");
 }
 #left {
-    width: 700px;
+    width: 600px;
     height: 700px;
 }
 #right {
-    width: 300px;
+    width: 400px;
     height: 700px;
 }
 .name_flame {
-    width: 600px;
+    width: 500px;
     height: 90px;
     margin: 50px;
     margin-top: 25px;
@@ -31,30 +31,30 @@ h2 {
     border:solid 1px #583822;
 }
 #spot_name_box {
-    width: 600px;
+    width: 500px;
     height: 90px;
     /*margin: 50px;*/
     /*margin-top: 25px;*/
     background-color: #f8f4e6;
 }
 .spot_picture {
-    width: 580px;
+    width: 480px;
     height: 400px;
 }
 .test {
     background-color: #e8d3c7;
     border:solid 20px #ffffff;
     border-bottom:solid 90px #ffffff;
-    width: 580px;
+    width: 480px;
 }
 .test_flame {
     margin: 50px;
     margin-top: 20px;
     border:solid 1px #583822;
-    width: 622px;
+    width: 522px;
 }
 #spot_info_box {
-    width: 250px;
+    width: 350px;
     height: 650px;
     margin-top: 25px;
     margin-left: 0px;
@@ -63,19 +63,20 @@ h2 {
     border:solid 1px #583822;
 }
 #map_box {
-    width: 230px;
-    height: 230px;
-    margin: 10px 10px;
+    width: 330px;
+    height: 330px;
+    margin: auto;
+    margin-top: 10px;
     background-color: #f8f4e6;
 }
 .pic_size {
-    width: 622px;
+    width: 480px;
     height: 400px;
     object-fit: cover;
 }
 .spot_info_comment_box {
-    width: 220px;
-    height: 350px;
+    width: 320px;
+    height: 250px;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -89,6 +90,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: auto;
 }
 .btn-flat-logo1,.btn-flat-logo2 {
   position: relative;
