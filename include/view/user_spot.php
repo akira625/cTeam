@@ -164,6 +164,7 @@
                     </select>
                 </form>
             </div>
+            <br>
             <?php if($change_station !== ''){?>
                 <table class="user_spot_table">
                     <tr>
