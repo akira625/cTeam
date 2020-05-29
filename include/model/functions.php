@@ -193,6 +193,7 @@ function insert_tags($link, $tag, $spot_id){
                     ('{$tag}', '{$spot_id}')
                 ";
         return execute_query($link, $sql);
+    
 }
 
 function update_comment($link, $spot_id,$update_comment){
@@ -284,6 +285,26 @@ function select_spots($link){
     return get_as_assoc($link, $sql);
 }
 
+function select_spots_whereStation($link, $station_id){
+    $sql = "SELECT 
+                slt.spot_id, sit.spot_name, sit.status, slt.lat, slt.lng, slt.postal_code, slt.prefecture, 
+                slt.city, slt.detail_address, sit.comment, sit.image, sit.genre, ta.station_name, ta.station_id 
+            FROM 
+                spot_location_table AS slt 
+            LEFT 
+                JOIN spot_info_table AS sit 
+            ON 
+                slt.spot_id = sit.spot_id 
+            LEFT JOIN 
+                station_table AS ta 
+            ON 
+                slt.station_id = ta.station_id 
+            WHERE 
+                slt.station_id = {$station_id}
+            ";
+    return get_as_assoc($link, $sql);
+}
+
 function select_tags($link, $spot_id){
     $sql = "SELECT
                 tag_id
@@ -315,25 +336,20 @@ function select_all_genres($link){
 }
 // かわいい→$tags[$tag_id]にしたい
 
-function delete_spot_location($link, $spot_id){
+function delete_spot($link, $spot_id){
     $sql = "DELETE 
-                slt, sit, tst
+                slt, sit
             FROM
                 spot_location_table AS slt
             INNER JOIN 
                 spot_info_table AS sit
             ON
                 slt.spot_id = sit.spot_id
-            INNER JOIN 
-                tag_spot_table AS tst
-            ON
-                slt.spot_id = tst.spot_id
             WHERE 
                 slt.spot_id = '{$spot_id}'
             ";
     return execute_query($link, $sql);
 }
-
 
 ///station関連///////////////////////////////////////////////////
 
@@ -377,7 +393,7 @@ function lng_check($int){
 ///user関連///////////////////////////////////////////////////////
 function select_user($link){
     $sql = "SELECT
-                user_id, user_name, gender, birthdate, created
+                user_name, created_at
             FROM
                 users_table
             ";
