@@ -7,6 +7,7 @@ $message     = '';
 $errors     = [];     // エラーメッセージ
 $filename = '';
 $status = 0;
+$change_station = '';
 $tags_name = [
 '1' => 'かわいい',
 '2' => 'おいしい',
@@ -124,6 +125,11 @@ if($sql_kind === 'insert'){
 
 }
 
+if($sql_kind === 'change_station'){
+    $change_station = get_post('change_station');
+    
+}
+
 // コネクション取得
 $link= get_db_connect();
 
@@ -171,10 +177,17 @@ if(is_post() === TRUE && count($errors) === 0){
         
     }
     
+    if($sql_kind === 'change_station'){
+        if($change_station === 'all'){
+            $spots = select_spots($link);
+        }else{
+            $spots = select_spots_whereStation($link, $change_station);
+        }
+    }
+    
     close_transaction($link, $errors);
 }   
 
-$spots = select_spots($link);
 
 close_db_connect($link);
 

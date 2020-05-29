@@ -147,41 +147,60 @@
         </div>
         <div class="wrapper">
             <h1>登録済みスポット一覧</h1>
-            <table class="user_spot_table">
-                <tr>
-                    <th class="spot_img">スポット画像</th>
-                    <th class="table_spot_name">スポット名</th>
-                    <th>最寄り駅</th>
-                    <th class="table_comment">コメント</th>
-                    <th>タグ</th>
-                    <th>ジャンル</th>
-                </tr>
-                <?php foreach($spots as $spot) {?>
-                    <?php if($spot['status'] === '1'){?>
-                    <tr class="user_spot_view">
-                        <td>
-                            <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
-                        </td>
-                        <td><?php print h($spot['spot_name']); ?></td>
-                        <td><?php print h($spot['station_name']); ?></td>
-                        <td><?php print h($spot['comment']); ?></td>
-                        <?php
-                            $link = get_db_connect();
-                            $spot_tags = select_tags($link, $spot['spot_id']);
-                            close_db_connect($link);
-                        ?>
-                        <td>
-                            <ul>
-                                <?php foreach($spot_tags as $spot_tag){?>
-                                    <li><?php print h($tags_name[$spot_tag['tag_id']]); ?></li>
-                                <?php }?>
-                            </ul>
-                        </td>
-                        <td><?php print h($genres_name[$spot['genre']]); ?></td>
+            <br>
+            <div class="search">
+            <p>最寄り駅で検索</p>
+                <form method="post">
+                    <select name='change_station'>
+                        <option value='all'>全てを選択</option>
+                        <?php foreach($stations as $station){?>
+                            <option value='<?php print h($station['station_id']);?>' 
+                            <?php if($change_station === $station['station_id']){print 'selected';}?>>
+                                <?php print h($station['station_name']);?>
+                            </option>
+                        <?php }?>
+                        <input type="hidden" name="sql_kind" value="change_station">
+                        <input type="submit" value="表示">
+                    </select>
+                </form>
+            </div>
+            <?php if($change_station !== ''){?>
+                <table class="user_spot_table">
+                    <tr>
+                        <th class="spot_img">スポット画像</th>
+                        <th class="table_spot_name">スポット名</th>
+                        <th class="table_station">最寄り駅</th>
+                        <th class="table_comment">コメント</th>
+                        <th>タグ</th>
+                        <th>ジャンル</th>
                     </tr>
-                    <?php }?>
-                <?php } ?>
-            </table>
+                    <?php foreach($spots as $spot) {?>
+                        <?php if($spot['status'] === '1'){?>
+                        <tr class="user_spot_view">
+                            <td>
+                                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
+                            </td>
+                            <td><?php print h($spot['spot_name']); ?></td>
+                            <td><?php print h($spot['station_name']); ?></td>
+                            <td><?php print h($spot['comment']); ?></td>
+                            <?php
+                                $link = get_db_connect();
+                                $spot_tags = select_tags($link, $spot['spot_id']);
+                                close_db_connect($link);
+                            ?>
+                            <td>
+                                <ul>
+                                    <?php foreach($spot_tags as $spot_tag){?>
+                                        <li><?php print h($tags_name[$spot_tag['tag_id']]); ?></li>
+                                    <?php }?>
+                                </ul>
+                            </td>
+                            <td><?php print h($genres_name[$spot['genre']]); ?></td>
+                        </tr>
+                        <?php }?>
+                    <?php } ?>
+                </table>
+            <?php }?>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
