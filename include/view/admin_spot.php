@@ -130,7 +130,6 @@
                         </textarea>
                         <input type="submit" value="変更">
                         <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
-                        <input type="hidden" name="change_station" value=<?php print h($change_station);?>>
                         <input type="hidden" name="sql_kind" value="update_comment">
                     </form>
                 </td>
@@ -155,7 +154,6 @@
                         <input type="hidden" name="sql_kind" value="update_tags">
                         <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
                         <input type="submit" value="変更">
-                        <input type="hidden" name="change_station" value=<?php print h($change_station);?>>
                     </form>
                 </td>
                 <td>
@@ -171,7 +169,6 @@
                         <input type="hidden" name="sql_kind" value="update_genre">
                         <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
                         <input type="submit" value="変更">
-                        <input type="hidden" name="change_station" value=<?php print h($change_station);?>>
                     </form>
                 </td>
                 <td>
@@ -186,7 +183,6 @@
                         <!--type="hidden"にid入れれば、inputをbuttonにして冗長に書く必要なくなる！-->
                         <input type = "hidden" name = "spot_id" value = <?php print $spot['spot_id'];?>>
                         <input type = "hidden" name = "sql_kind" value = "update_status">
-                        <input type="hidden" name="change_station" value=<?php print h($change_station);?>>
                     </form>
                 </td>
                 <td>
@@ -194,7 +190,6 @@
                         <input type = "submit" name="delete" value="削除">
                         <input type = "hidden" name = "spot_id" value = <?php print h($spot['spot_id']);?>>
                         <input type = "hidden" name = "sql_kind" value = "delete">
-                        <input type="hidden" name="change_station" value=<?php print h($change_station);?>>
                     </form>
                 </td>
             </tr>
