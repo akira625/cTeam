@@ -54,7 +54,9 @@ require_once './include/model/cteam_function.php';
                     </div>
                     <div class="button_box">
                         <button id="only_change_spot" class="btn-flat-logo1" value="<?php print h($tag_id); ?>">スポットをかえる</button>
-                        <button id="list" class="btn-flat-logo1">今までのスポットを表示</button>
+                        <form action="view_list.php" method="post" class="btn-flat-logo1">
+                            <button class="btn-flat-logo2">今までのスポットを表示</button>
+                        </form>
                         <form action="top_page.php" method="post">
                             <button class="btn-flat-logo2">TOPにもどる</button>
                         </form>
@@ -217,13 +219,7 @@ require_once './include/model/cteam_function.php';
                         console.log(data);
                     });
                 });
-                $('#only_change_spot').click(function(e) {
-                    
-                }
-                
-                
             });
-            
             
             //map_boxのdivを表示しますよ
             var map_box = $("#map_box")[0];

@@ -57,5 +57,8 @@ $genre_name_array =get_genre_name_by_gi($link, $genre_id);
 $genre_name = $genre_name_array[0]['genre_name'];
 // var_dump($genre_name);
 close_db($link);
+// リスト処理
+$_SESSION['selected_spot'][] = $spot_data[$rand_spot_number]['spot_id'];
+
 
 include_once 'include/view/view_spot.php';
