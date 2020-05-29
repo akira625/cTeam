@@ -13,7 +13,10 @@
     </style>
 </head>
 <body>
-    <button id="delete_list" class="btn-flat-logo1">履歴を消す</button>
+    <form action="delete_list.php" method="post">
+        <button id="delete_list" class="btn-flat-logo1">履歴を消す</button>
+    </form>
+    
     <table>
         <tr>
             <th>写真</th>
@@ -32,14 +35,5 @@
         </tr>
     <?php } ?>
     </table>
-    <script>
-        $(function(){
-            $('#delete_list').click(function(e) {
-                <?php unset($_SESSION['selected_spot']); ?>;
-                document.location.reload();
-            };
-        };
-    </script>
-    
 </body>
 </html>

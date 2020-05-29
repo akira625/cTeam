@@ -11,8 +11,8 @@ if ($spot_id === NULL) {
     $_SESSION['errors'][] = '表示されたことのあるスポットがありません。';
     redirect(C_TEAM_TOP_PAGE);
 }
-var_dump($spot_id);
-var_dump(count($spot_id));
+// var_dump($spot_id);
+// var_dump(count($spot_id));
 
 
 for ($i = 0; $i < count($spot_id); $i++) {
