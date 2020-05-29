@@ -57,7 +57,7 @@ require_once '../cTeam/include/model/my_function.php';
                         </div>
                         <div class="btn-circle">
                             <form action="../cTeam/Tag_set_process.php" method="post">
-                                <input type="submit" class="btn btn6" value="ウェエエエエエエエエイ">
+                                <input type="submit" class="btn btn6" value="らんだむ">
                                 <input type="hidden" name="tag_id" value="6">
                             </form>
                         </div>

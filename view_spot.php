@@ -36,10 +36,10 @@ if ($genre_id === '6') {
     $genre_id = mt_rand(1,5);
     $random_genre_flag = 1;
 }
-var_dump($tag_id);
-var_dump($genre_id);
-var_dump($random_tag_flag);
-var_dump($random_genre_flag);
+// var_dump($tag_id);
+// var_dump($genre_id);
+// var_dump($random_tag_flag);
+// var_dump($random_genre_flag);
 
 $spot_data = get_spot_table($link, $tag_id, $genre_id);
 $number_spots = count($spot_data);
