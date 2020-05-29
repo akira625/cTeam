@@ -24,6 +24,7 @@ if($tag_id === ''){
     $_SESSION['errors'][] = 'タグを選んでください。';
     redirect(C_TEAM_TOP_PAGE);
 }else if ($tag_id === '6') {
+    $_SESSION['tag_id'] = $tag_id;
     redirect(C_TEAM_VIEW_SPOT);
 }
 
