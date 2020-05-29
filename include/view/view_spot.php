@@ -35,8 +35,9 @@ require_once './include/model/cteam_function.php';
             <div id="left">
                 <div class="name_flame">
                     <div id="spot_name_box">
-                        <h1 class="spot_name"></h1>
-                        <h2 class="station_name">最寄駅：<?php print h($station_name); ?></h2>
+                        <h1 class="spot_name" style="padding-left: 6px;"></h1>
+                        <h2 class="station_name" style="padding-left: 6px;">最寄駅：<?php print h($station_name); ?></h2>
+                        <p><span class="tag_name" style="padding-left: 6px;"><?php print h($tag_name); ?></span> × <span class="genre_name"><?php print h($genre_name); ?></span></p>
                     </div>
                 </div>
                 <div class="test_flame">
@@ -52,9 +53,9 @@ require_once './include/model/cteam_function.php';
                         <p class="spot_info"></p>
                     </div>
                     <div class="button_box">
-                        <button id="only_change_spot" class="btn-flat-logo" value="<?php print h($tag_id); ?>">スポットをかえる</button>
+                        <button id="only_change_spot" class="btn-flat-logo1" value="<?php print h($tag_id); ?>">スポットをかえる</button>
                         <form action="top_page.php" method="post">
-                            <button class="btn-flat-logo">TOPにもどる</button>
+                            <button class="btn-flat-logo2">TOPにもどる</button>
                         </form>
                     </div>
                 </div>
@@ -65,6 +66,19 @@ require_once './include/model/cteam_function.php';
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<?php echo API_KEY; ?>&callback=init" async defer></script>
     <script>
         function init(){
+            var check_tag = <?php print h($tag_id); ?>;
+            if(check_tag === 1){
+                $('header').addClass('cute');
+            } else if(check_tag === 2){
+                $('header').addClass('delicious');
+            } else if(check_tag === 3){
+                $('header').addClass('enjoy');
+            } else if(check_tag === 4){
+                $('header').addClass('beautiful');
+            } else if(check_tag === 5){
+                $('header').addClass('nostalgic');
+            }
+            
             var random_spot = {
                 lat: <?php print h($spot_data[$rand_spot_number]['lat']); ?>,
                 lng: <?php print h($spot_data[$rand_spot_number]['lng']); ?>
@@ -73,6 +87,7 @@ require_once './include/model/cteam_function.php';
                 $('.spot_picture').html('<img class="pic_size" src="spot_picture/<?php print h($spot_data[$rand_spot_number]['image']); ?>" alt="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>" title="<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>">');
                 $('.spot_info').html('<?php print h($spot_data[$rand_spot_number]['comment']); ?>');
                 $('.spot_name').html('<?php print h($spot_data[$rand_spot_number]['spot_name']); ?>');
+                $('.station_name').html('最寄駅：<?php print h($station_name); ?>');
             };
             function createMarker(lat, lng, name){
                 //マーカの作成
@@ -91,17 +106,38 @@ require_once './include/model/cteam_function.php';
                 map.panTo(new_position);
                 infoWindow.open(map, spot_marker); 
             }
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            };
             $(function() {
                 indicate_spot();
             });
             
             $(function() {
                 $('#only_change_spot').click(function(e) {
+                    var random_tag_flag = <?php print h($random_tag_flag); ?>;
+                    var random_genre_flag = <?php print h($random_genre_flag); ?>;
+                    if(random_tag_flag === 1 && random_genre_flag === 0){
+                        var tag_id = getRandomInt(5);
+                        var genre_id = getRandomInt(5);
+                        console.log(tag_id);
+                        console.log(genre_id);
+                        console.log(random_genre_flag);
+                    } else if(random_tag_flag === 0 && random_genre_flag === 1){
+                        var tag_id = <?php print h($tag_id); ?>;
+                        var genre_id = getRandomInt(5);
+                        var tag_name = '<?php print h($tag_name); ?>';
+                        console.log(tag_id);
+                        console.log(genre_id);
+                        console.log(tag_name);
+                    } else {
+                        var tag_id = $('#only_change_spot').val();
+                        var genre_id = <?php print h($genre_id); ?>;
+                        var tag_name = '<?php print h($tag_name); ?>';
+                        console.log(tag_id);
+                        console.log(genre_id);
+                    }
                     e.preventDefault();
-                    var tag_id = $('#only_change_spot').val();
-                    var genre_id = <?php print h($genre_id); ?>;
-                    console.log(tag_id);
-                    console.log(genre_id);
                     $.ajax( {
                         url: 'only_change_spot.php',
                         type: 'POST',
@@ -114,10 +150,69 @@ require_once './include/model/cteam_function.php';
                         $('.spot_picture').html('<img class="pic_size" src="spot_picture/' + data.image + '" alt="' + data.spot_name + '" title="' + data.spot_name + '">');
                         $('.spot_info').html(data.comment);
                         $('.spot_name').html(data.spot_name);
-                        spot_marker.setMap(null);
-                        createMarker(data.lat, data.lng, data.spot_name);
+                        var spot_id = data.spot_id;
+                        $.ajax( {
+                            url: 'get_station_tag_genre_name.php',
+                            type: 'POST',
+                            data: {
+                                'spot_id': spot_id
+                                },
+                            dataType:'json'
+                        }).done(function(station_tag_genre_name){
+                            $('.station_name').html('最寄駅：' + station_tag_genre_name.station_name);
+                            if(random_genre_flag === 1){
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(tag_name);
+                                console.log(random_tag_flag);
+                            } else if (random_tag_flag === 1){
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(station_tag_genre_name.tag_name);
+                                check_tag = station_tag_genre_name.tag_id;
+                                console.log(random_tag_flag);
+                            }else {
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(tag_name);
+                                console.log(check_tag);
+                                console.log(random_tag_flag);
+                            }
+                            if(random_tag_flag === 0 && random_genre_flag === 0){
+                                check_tag = tag_id;
+                                console.log(random_tag_flag);
+                                $('header').removeClass();
+                                if(check_tag === '1'){
+                                    $('header').addClass('cute');
+                                } else if(check_tag === '2'){
+                                    $('header').addClass('delicious');
+                                } else if(check_tag === '3'){
+                                    $('header').addClass('enjoy');
+                                } else if(check_tag === '4'){
+                                    $('header').addClass('beautiful');
+                                } else if(check_tag === '5'){
+                                    $('header').addClass('nostalgic');
+                                }
+                            } else if(random_tag_flag === 1 && random_genre_flag === 0){
+                                console.log(random_tag_flag);
+                                $('header').removeClass();
+                                if(check_tag === '1'){
+                                    $('header').addClass('cute');
+                                } else if(check_tag === '2'){
+                                    $('header').addClass('delicious');
+                                } else if(check_tag === '3'){
+                                    $('header').addClass('enjoy');
+                                } else if(check_tag === '4'){
+                                    $('header').addClass('beautiful');
+                                } else if(check_tag === '5'){
+                                    $('header').addClass('nostalgic');
+                                }
+                            }
+                            spot_marker.setMap(null);
+                            createMarker(data.lat, data.lng, data.spot_name);
+                        }).fail(function(station_name){
+                            alert('json取得エラー(station_tag_genre_name)です');
+                            console.log(station_name);
+                        })
                     }).fail(function(data){
-                        alert('エラーです');
+                        alert('json取得エラーです');
                         console.log(data);
                     });
                 });

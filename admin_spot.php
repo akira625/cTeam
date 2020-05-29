@@ -172,7 +172,7 @@ if($sql_kind === 'delete'){
     $delete = get_post('delete');
     $spot_id = get_post('spot_id');
     
-    if(is_blank($delete) !== TRUE && $delete !== '削除'){
+    if($delete !== '' && $delete !== '削除する'){
         $errors[] = '不正な処理です。';
     }
 }
@@ -203,6 +203,7 @@ if(is_post() === TRUE && count($errors) === 0){
                 foreach($tags as $tag){
                     if(insert_tags($link, $tag, $spot_id) === TRUE){
                         $message = 'スポットを追加しました。';
+
                     }else{
                         $errors[] = '追加失敗.tag_spot_table';
                     }
@@ -264,7 +265,7 @@ if(is_post() === TRUE && count($errors) === 0){
     }
     
     if($sql_kind === 'delete'){
-        if(delete_spot($link, $spot_id) === TRUE){
+        if(delete_spot_location($link, $spot_id) === TRUE){
             $message = 'データを削除しました。';
         }else{
             $errors[] = 'delete処理失敗';
@@ -284,6 +285,8 @@ if(is_post() === TRUE && count($errors) === 0){
 }   
 
 // var_dump($errors);
+$spots = select_spots($link);
+
 
 close_db_connect($link);
 

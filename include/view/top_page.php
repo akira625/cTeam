@@ -41,10 +41,10 @@ require_once '../cTeam/include/model/my_function.php';
             <div class='btn_box'>
                 
                     <div class="btn_position1">
-                        <div class="btn-square-soft-pink">
+                        <div class="btn-square-soft-purple">
                             <form action="../cTeam/Tag_set_process.php" method="post">
-                                <input type="submit" class="btn btn1" value="かわいい">
-                                <input type="hidden" name="tag_id" value="1">
+                                <input type="submit" class="btn btn5" value="なつかしい">
+                                <input type="hidden" name="tag_id" value="5">
                             </form>
                         </div>
                     </div>
@@ -69,10 +69,11 @@ require_once '../cTeam/include/model/my_function.php';
                         </div>
                     </div>
                     <div class="btn_position3">
-                        <div class="btn-square-soft-purple">
+                        
+                        <div class="btn-square-soft-pink">
                             <form action="../cTeam/Tag_set_process.php" method="post">
-                                <input type="submit" class="btn btn5" value="なつかしい">
-                                <input type="hidden" name="tag_id" value="5">
+                                <input type="submit" class="btn btn1" value="かわいい">
+                                <input type="hidden" name="tag_id" value="1">
                             </form>
                         </div>
                         <div class="btn-square-soft-blue">

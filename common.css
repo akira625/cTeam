@@ -46,14 +46,29 @@ p,h2{
 
 body {
   font-family: sans-serif;
-  background-color: #fdeff2;
+  background-color: #e0efff;
   height: 100%;
   min-width: 960px;
 }
 
 header {
   height: 60px;
+  background-color: #7fbfff;
+}
+.cute {
   background-color: #f4b3c2;
+}
+.delicious {
+  background-color: #ee827c;
+}
+.enjoy {
+  background-color: #f7b977;
+}
+.beautiful {
+  background-color: #a2d7dd;
+}
+.nostalgic {
+  background-color: #c0a2c7;
 }
 
 .header-box {
@@ -252,34 +267,6 @@ header {
   color: dimgray;
 }
 
-.search select{
-  width: 50%;
-  height: 25px;
-  font-size: 18px;
-  vertical-align: top;
-  padding-left: 5px;
-  box-sizing: border-box;
-  color: dimgray;
-}
-
-.search p{
-  font-size: 18px;
-}
-
-.search input[type="submit"]{
-  width: 30%;
-  height: 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border: 1px solid silver;
-  vertical-align: top;
-  background-color: lightgray;
-  border-bottom: solid 3px gray;
-  border-right: solid 4px darkgray;
-  color: dimgray;
-  padding-left: 10px;
-}
-
 .userInsert input[type="text"] {
   width: 100%;
   height: 25px;
@@ -329,10 +316,6 @@ input[type="file"] {
   width: 270px;
 }
 
-.table_station{
-  width: 100px;
-}
-
 table,td,th{
    border: solid 1px dimgray;
 }
@@ -368,7 +351,7 @@ img{
 
 .btn_position3 {
   text-align: center;
-  margin-top:60px;
+  margin-top:50px;
   margin-bottom:30px;
 }
 
@@ -407,7 +390,7 @@ img{
 .btn5 {
   background: #c0a2c7;/*ボタン色*/
   border-bottom: solid 4px #dbd0e6;
-  margin-right: 15px;
+  /*margin-right: 15px;*/
 }
 .btn6 {
   background: #d8e698;
@@ -524,4 +507,3 @@ a:link.menu {
 a:visited.menu  {
   color: #ffffff;
 }
-
