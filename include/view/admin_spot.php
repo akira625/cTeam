@@ -77,107 +77,125 @@
         </form>
     </div>
     <h2>登録済みスポット情報変更</h2>
-    <p>スポット一覧</p>
-    <table>
-        <tr>
-            <th class="img">スポット画像</th>
-            <th class="spot_name">スポット名</th>
-            <th class="near_station">最寄り駅</th>
-            <th class="selected_address">住所</th>
-            <th class="lat">緯度</th>
-            <th class="lng">経度</th>
-            <th class="update_comment">コメント</th>
-            <th class="tag">タグ</th>
-            <th>ジャンル</th>
-            <th class="status">ステータス</th>
-            <th>操作</th>
-        </tr>
-    
-    <?php foreach($spots as $spot) {?>
-        <?php if($spot['status'] === '1'){?>
-        <tr>
-        <?php }else{?>
-        <tr class='status_false'>
-            <?php }?>
-            <td>
-                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
-            </td>
-            <td><?php print h($spot['spot_name']); ?></td>
-            <td><?php print h($spot['station_name']); ?></td>
-            <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
-            <td><?php print h($spot['lat']); ?></td>
-            <td><?php print h($spot['lng']); ?></td>
-            <td>
-                <form method = "post">
-                    <textarea name='update_comment' class='update_comment'><?php print h($spot['comment']); ?>
-                    </textarea>
-                    <input type="submit" value="変更">
-                    <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
-                    <input type="hidden" name="sql_kind" value="update_comment">
-                </form>
-            </td>
-            <?php
-                $link = get_db_connect();
-                //array_column ( 元の配列, 取り出したい配列のキー)
-                $spot_tags = array_column(select_tags($link, $spot['spot_id']), 'tag_id');
-                // var_dump($spot_tags);
-                close_db_connect($link);
-            ?>
-            <td>
-                <form method = "post">
-                    <ul>
-                        <?php foreach($all_tags as $tag_name){?>
-                            <li>
-                                <input type="checkbox" name="update_tags[]" value="<?php print h($tag_name['tag_id']);?>"
-                                <?php if(in_array($tag_name['tag_id'], $spot_tags)){print 'checked';} ?>>
-                                <?php print h($tag_name['tag_name']);?>
-                            </li>
-                        <?php }?>
-                    </ul>
-                    <input type="hidden" name="sql_kind" value="update_tags">
-                    <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
-                    <input type="submit" value="変更">
-                </form>
-            </td>
-            <td>
-                <form method = "post">
-                    <select name='update_genre'>
-                        <?php foreach($all_genres as $genre_name){?>
-                            <option value='<?php print h($genre_name['genre_id']);?>'
-                            <?php if($genre_name['genre_id'] === $spot['genre']){print 'selected';}?>>
-                                <?php print h($genre_name['genre_name']);?>
-                            </option>
-                        <?php }?>
-                    </select>
-                    <input type="hidden" name="sql_kind" value="update_genre">
-                    <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
-                    <input type="submit" value="変更">
-                </form>
-            </td>
-            <td>
-                <form method = "post">
-                    <?php if($spot['status'] === '1'){?>
-                        <input type = "submit" name = "update_status" value = "⇒非公開">
-                        <input type = "hidden" name = "status" value = '0'>
-                    <?php }else{?>
-                        <input type = "submit" name = "update_status" value = "⇒公開">
-                        <input type = "hidden" name = "status" value = '1'>
+        <div class="search">
+        <p>最寄り駅で検索</p>
+            <form method="post">
+                <select name='change_station'>
+                    <option value='all'>全てを選択</option>
+                    <?php foreach($stations as $station){?>
+                        <option value='<?php print h($station['station_id']);?>' 
+                        <?php if($change_station === $station['station_id']){print 'selected';}?>>
+                            <?php print h($station['station_name']);?>
+                        </option>
                     <?php }?>
-                    <!--type="hidden"にid入れれば、inputをbuttonにして冗長に書く必要なくなる！-->
-                    <input type = "hidden" name = "spot_id" value = <?php print $spot['spot_id'];?>>
-                    <input type = "hidden" name = "sql_kind" value = "update_status">
-                </form>
-            </td>
-            <td>
-                <form method = "post">
-                    <input type = "submit" name="delete" value="削除">
-                    <input type = "hidden" name = "spot_id" value = <?php print h($spot['spot_id']);?>>
-                    <input type = "hidden" name = "sql_kind" value = "delete">
-                </form>
-            </td>
-        </tr>
-    <?php } ?>
-    </table>
+                    <input type="hidden" name="sql_kind" value="change_station">
+                    <input type="submit" value="表示">
+                </select>
+            </form>
+        </div>
+        <br>
+    <?php if($change_station !== ''){?>
+        <table>
+            <tr>
+                <th class="img">スポット画像</th>
+                <th class="spot_name">スポット名</th>
+                <th class="near_station">最寄り駅</th>
+                <th class="selected_address">住所</th>
+                <th class="lat">緯度</th>
+                <th class="lng">経度</th>
+                <th class="update_comment">コメント</th>
+                <th class="tag">タグ</th>
+                <th>ジャンル</th>
+                <th class="status">ステータス</th>
+                <th>操作</th>
+            </tr>
+        
+        <?php foreach($spots as $spot) {?>
+            <?php if($spot['status'] === '1'){?>
+            <tr>
+            <?php }else{?>
+            <tr class='status_false'>
+                <?php }?>
+                <td>
+                    <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
+                </td>
+                <td><?php print h($spot['spot_name']); ?></td>
+                <td><?php print h($spot['station_name']); ?></td>
+                <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
+                <td><?php print h($spot['lat']); ?></td>
+                <td><?php print h($spot['lng']); ?></td>
+                <td>
+                    <form method = "post">
+                        <textarea name='update_comment' class='update_comment'><?php print h($spot['comment']); ?>
+                        </textarea>
+                        <input type="submit" value="変更">
+                        <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
+                        <input type="hidden" name="sql_kind" value="update_comment">
+                    </form>
+                </td>
+                <?php
+                    $link = get_db_connect();
+                    //array_column ( 元の配列, 取り出したい配列のキー)
+                    $spot_tags = array_column(select_tags($link, $spot['spot_id']), 'tag_id');
+                    // var_dump($spot_tags);
+                    close_db_connect($link);
+                ?>
+                <td>
+                    <form method = "post">
+                        <ul>
+                            <?php foreach($all_tags as $tag_name){?>
+                                <li>
+                                    <input type="checkbox" name="update_tags[]" value="<?php print h($tag_name['tag_id']);?>"
+                                    <?php if(in_array($tag_name['tag_id'], $spot_tags)){print 'checked';} ?>>
+                                    <?php print h($tag_name['tag_name']);?>
+                                </li>
+                            <?php }?>
+                        </ul>
+                        <input type="hidden" name="sql_kind" value="update_tags">
+                        <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
+                        <input type="submit" value="変更">
+                    </form>
+                </td>
+                <td>
+                    <form method = "post">
+                        <select name='update_genre'>
+                            <?php foreach($all_genres as $genre_name){?>
+                                <option value='<?php print h($genre_name['genre_id']);?>'
+                                <?php if($genre_name['genre_id'] === $spot['genre']){print 'selected';}?>>
+                                    <?php print h($genre_name['genre_name']);?>
+                                </option>
+                            <?php }?>
+                        </select>
+                        <input type="hidden" name="sql_kind" value="update_genre">
+                        <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
+                        <input type="submit" value="変更">
+                    </form>
+                </td>
+                <td>
+                    <form method = "post">
+                        <?php if($spot['status'] === '1'){?>
+                            <input type = "submit" name = "update_status" value = "⇒非公開">
+                            <input type = "hidden" name = "status" value = '0'>
+                        <?php }else{?>
+                            <input type = "submit" name = "update_status" value = "⇒公開">
+                            <input type = "hidden" name = "status" value = '1'>
+                        <?php }?>
+                        <!--type="hidden"にid入れれば、inputをbuttonにして冗長に書く必要なくなる！-->
+                        <input type = "hidden" name = "spot_id" value = <?php print $spot['spot_id'];?>>
+                        <input type = "hidden" name = "sql_kind" value = "update_status">
+                    </form>
+                </td>
+                <td>
+                    <form method = "post">
+                        <input type = "submit" name="delete" value="削除">
+                        <input type = "hidden" name = "spot_id" value = <?php print h($spot['spot_id']);?>>
+                        <input type = "hidden" name = "sql_kind" value = "delete">
+                    </form>
+                </td>
+            </tr>
+        <?php } ?>
+        </table>
+    <?php }?>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script>
     
