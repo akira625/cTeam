@@ -172,7 +172,7 @@ if($sql_kind === 'delete'){
     $delete = get_post('delete');
     $spot_id = get_post('spot_id');
     
-    if(is_blank($delete) !== TRUE && $delete !== '削除'){
+    if($delete !== '' && $delete !== '削除する'){
         $errors[] = '不正な処理です。';
     }
 }

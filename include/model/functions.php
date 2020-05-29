@@ -284,26 +284,6 @@ function select_spots($link){
     return get_as_assoc($link, $sql);
 }
 
-function select_spots_whereStation($link, $station_id){
-    $sql = "SELECT 
-                slt.spot_id, sit.spot_name, sit.status, slt.lat, slt.lng, slt.postal_code, slt.prefecture, 
-                slt.city, slt.detail_address, sit.comment, sit.image, sit.genre, ta.station_name, ta.station_id 
-            FROM 
-                spot_location_table AS slt 
-            LEFT 
-                JOIN spot_info_table AS sit 
-            ON 
-                slt.spot_id = sit.spot_id 
-            LEFT JOIN 
-                station_table AS ta 
-            ON 
-                slt.station_id = ta.station_id 
-            WHERE 
-                slt.station_id = {$station_id}
-            ";
-    return get_as_assoc($link, $sql);
-}
-
 function select_tags($link, $spot_id){
     $sql = "SELECT
                 tag_id
