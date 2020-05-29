@@ -80,16 +80,16 @@
     <p>スポット一覧</p>
     <table>
         <tr>
-            <th>スポット画像</th>
-            <th>スポット名</th>
-            <th>最寄り駅</th>
-            <th>住所</th>
-            <th>緯度</th>
-            <th>経度</th>
-            <th>コメント</th>
-            <th>タグ</th>
+            <th class="img">スポット画像</th>
+            <th class="spot_name">スポット名</th>
+            <th class="near_station">最寄り駅</th>
+            <th class="selected_address">住所</th>
+            <th class="lat">緯度</th>
+            <th class="lng">経度</th>
+            <th class="update_comment">コメント</th>
+            <th class="tag">タグ</th>
             <th>ジャンル</th>
-            <th>ステータス</th>
+            <th class="status">ステータス</th>
             <th>操作</th>
         </tr>
     
@@ -99,18 +99,17 @@
         <?php }else{?>
         <tr class='status_false'>
             <?php }?>
-            <!--<td>-->
-            <!--    <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">-->
-            <!--</td>-->
-            <!--<td><?php print h($spot['spot_name']); ?></td>-->
-            <!--<td><?php print h($spot['station_name']); ?></td>-->
-            <!--<td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>-->
-            <!--<td><?php print h($spot['lat']); ?></td>-->
-            <!--<td><?php print h($spot['lng']); ?></td>-->
+            <td>
+                <img src="<?php print h('./spot_picture/'.$spot['image']); ?>">
+            </td>
+            <td><?php print h($spot['spot_name']); ?></td>
+            <td><?php print h($spot['station_name']); ?></td>
+            <td><?php print h($spot['prefecture'].$spot['city'].$spot['detail_address']); ?></td>
+            <td><?php print h($spot['lat']); ?></td>
+            <td><?php print h($spot['lng']); ?></td>
             <td>
                 <form method = "post">
-                    <textarea name='update_comment' class='update_comment'>
-                        <?php print h($spot['comment']); ?>
+                    <textarea name='update_comment' class='update_comment'><?php print h($spot['comment']); ?>
                     </textarea>
                     <input type="submit" value="変更">
                     <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
@@ -126,11 +125,15 @@
             ?>
             <td>
                 <form method = "post">
-                    <?php foreach($all_tags as $tag_name){?>
-                            <input type="checkbox" name="update_tags[]" value="<?php print h($tag_name['tag_id']);?>"
-                            <?php if(in_array($tag_name['tag_id'], $spot_tags)){print 'checked';} ?>>
-                            <?php print h($tag_name['tag_name']);?>
-                    <?php }?>
+                    <ul>
+                        <?php foreach($all_tags as $tag_name){?>
+                            <li>
+                                <input type="checkbox" name="update_tags[]" value="<?php print h($tag_name['tag_id']);?>"
+                                <?php if(in_array($tag_name['tag_id'], $spot_tags)){print 'checked';} ?>>
+                                <?php print h($tag_name['tag_name']);?>
+                            </li>
+                        <?php }?>
+                    </ul>
                     <input type="hidden" name="sql_kind" value="update_tags">
                     <input type="hidden" name="spot_id" value=<?php print h($spot['spot_id']);?>>
                     <input type="submit" value="変更">
@@ -154,10 +157,10 @@
             <td>
                 <form method = "post">
                     <?php if($spot['status'] === '1'){?>
-                        <input type = "submit" name = "update_status" value = "公開→非公開">
+                        <input type = "submit" name = "update_status" value = "⇒非公開">
                         <input type = "hidden" name = "status" value = '0'>
                     <?php }else{?>
-                        <input type = "submit" name = "update_status" value = "非公開→公開">
+                        <input type = "submit" name = "update_status" value = "⇒公開">
                         <input type = "hidden" name = "status" value = '1'>
                     <?php }?>
                     <!--type="hidden"にid入れれば、inputをbuttonにして冗長に書く必要なくなる！-->
@@ -167,7 +170,7 @@
             </td>
             <td>
                 <form method = "post">
-                    <input type = "submit" name="delete" value="削除する">
+                    <input type = "submit" name="delete" value="削除">
                     <input type = "hidden" name = "spot_id" value = <?php print h($spot['spot_id']);?>>
                     <input type = "hidden" name = "sql_kind" value = "delete">
                 </form>
