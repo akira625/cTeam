@@ -173,7 +173,6 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = '追加失敗.spot_location_table';
         }
-        
     }
     close_transaction($link, $errors);
     
