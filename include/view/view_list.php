@@ -35,8 +35,9 @@
     <script>
         $(function(){
             $('#delete_list').click(function(e) {
-                <?php unset($_SESSION['selected_spot']); ?>
-            }
+                <?php unset($_SESSION['selected_spot']); ?>;
+                document.location.reload();
+            };
         };
     </script>
     
