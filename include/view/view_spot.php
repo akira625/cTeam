@@ -134,6 +134,7 @@ require_once './include/model/cteam_function.php';
                     } else {
                         var tag_id = $('#only_change_spot').val();
                         var genre_id = <?php print h($genre_id); ?>;
+                        var tag_name = '<?php print h($tag_name); ?>';
                         console.log(tag_id);
                         console.log(genre_id);
                     }
@@ -163,11 +164,35 @@ require_once './include/model/cteam_function.php';
                             if(random_genre_flag === 1){
                                 $('.genre_name').html(station_tag_genre_name.genre_name);
                                 $('.tag_name').html(tag_name);
-                            } else {
+                                console.log(random_tag_flag);
+                            } else if (random_tag_flag === 1){
                                 $('.genre_name').html(station_tag_genre_name.genre_name);
                                 $('.tag_name').html(station_tag_genre_name.tag_name);
                                 check_tag = station_tag_genre_name.tag_id;
+                                console.log(random_tag_flag);
+                            }else {
+                                $('.genre_name').html(station_tag_genre_name.genre_name);
+                                $('.tag_name').html(tag_name);
                                 console.log(check_tag);
+                                console.log(random_tag_flag);
+                            }
+                            if(random_tag_flag === 0 && random_genre_flag === 0){
+                                check_tag = tag_id;
+                                console.log(random_tag_flag);
+                                $('header').removeClass();
+                                if(check_tag === '1'){
+                                    $('header').addClass('cute');
+                                } else if(check_tag === '2'){
+                                    $('header').addClass('delicious');
+                                } else if(check_tag === '3'){
+                                    $('header').addClass('enjoy');
+                                } else if(check_tag === '4'){
+                                    $('header').addClass('beautiful');
+                                } else if(check_tag === '5'){
+                                    $('header').addClass('nostalgic');
+                                }
+                            } else if(random_tag_flag === 1 && random_genre_flag === 0){
+                                console.log(random_tag_flag);
                                 $('header').removeClass();
                                 if(check_tag === '1'){
                                     $('header').addClass('cute');
