@@ -25,6 +25,15 @@ table,td,th{
 img{
    width: 200px
 }
+
+.img{
+   width: 200px;
+}
+
+.tag{
+   width: 80px;
+}
+
 .status_false{
    background-color: gray;
 }
@@ -56,6 +65,10 @@ img{
    padding: 5px 0;
 }
 
+.selected_address{
+   width: 150px;
+}
+
 .success{
    font-size: 20px;
    color: #0000ff;
@@ -64,4 +77,28 @@ img{
 .errors {
    font-size: 20px;
   color: #FF0000;
+}
+
+.spot_name{
+  width: 100px;
+}
+
+.lat, .lng{
+  width: 80px;
+}
+
+ul {
+  list-style:none;
+  padding: 0;
+  width: 120px;
+}
+.near_station{
+   width: 80px;
+}
+.update_comment{
+   width: 200px;
+}
+
+.status{
+   width: 90px;
 }
