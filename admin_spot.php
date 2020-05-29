@@ -129,7 +129,7 @@ if($sql_kind === 'insert'){
 if($sql_kind === 'update_comment'){
     
     $update_comment = get_post('update_comment');
-    
+    $change_station = get_post('change_station');
     $spot_id = get_post('spot_id');
     
     if(is_blank($update_comment) === TRUE){
@@ -139,6 +139,7 @@ if($sql_kind === 'update_comment'){
 
 if($sql_kind === 'update_tags'){
     $update_tags = get_post('update_tags');
+    $change_station = get_post('change_station');
     $spot_id = get_post('spot_id');
     
     if($update_tags === []){
@@ -149,6 +150,7 @@ if($sql_kind === 'update_tags'){
 
 if($sql_kind === 'update_genre'){
     $update_genre = get_post('update_genre');
+    $change_station = get_post('change_station');
     $spot_id = get_post('spot_id');
     
         
@@ -159,6 +161,7 @@ if($sql_kind === 'update_genre'){
 
 if($sql_kind === 'update_status'){
     $status = get_post('status');
+    $change_station = get_post('change_station');
     $spot_id = get_post('spot_id');
 
     if(is_blank($status) === TRUE){
@@ -170,6 +173,7 @@ if($sql_kind === 'update_status'){
 
 if($sql_kind === 'delete'){
     $delete = get_post('delete');
+    $change_station = get_post('change_station');
     $spot_id = get_post('spot_id');
     
     if($delete !== '' && $delete !== '削除する'){
@@ -223,6 +227,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = 'UPDATE処理失敗'.$sql;
         }
+        $spots = select_spots_whereStation($link, $change_station);
     }
     
     if($sql_kind === 'update_tags'){
@@ -244,7 +249,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = 'タグが変更されていません';
         }
-
+        $spots = select_spots_whereStation($link, $change_station);
     }
 
     if($sql_kind === 'update_genre'){
@@ -253,6 +258,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = 'UPDATE処理失敗';
         }
+        $spots = select_spots_whereStation($link, $change_station);
     }
 
     
@@ -262,6 +268,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = 'UPDATE処理失敗';
         }
+        $spots = select_spots_whereStation($link, $change_station);
     }
     
     if($sql_kind === 'delete'){
@@ -270,6 +277,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }else{
             $errors[] = 'delete処理失敗';
         }
+        $spots = select_spots_whereStation($link, $change_station);
     }
     
     close_transaction($link, $errors);
