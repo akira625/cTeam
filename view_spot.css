@@ -85,7 +85,7 @@ h2 {
 }
 
 .button_box {
-    width: 230px;
+    width: 340px;
     height: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -98,7 +98,7 @@ h2 {
   /*font-weight: bold;*/
   margin: 5px;
   margin-left: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 0.5px;
   text-decoration: none;
   color: #583822;
@@ -110,7 +110,7 @@ h2 {
   display: inline-block;
   /*font-weight: bold;*/
   margin: 5px;
-  margin-right: 0px;
+  margin-right: 5px;
   padding: 0.5px;
   text-decoration: none;
   color: #583822;

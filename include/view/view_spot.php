@@ -54,8 +54,8 @@ require_once './include/model/cteam_function.php';
                     </div>
                     <div class="button_box">
                         <button id="only_change_spot" class="btn-flat-logo1" value="<?php print h($tag_id); ?>">スポットをかえる</button>
-                        <form action="view_list.php" method="post" class="btn-flat-logo1">
-                            <button class="btn-flat-logo2">今までのスポットを表示</button>
+                        <form action="view_list.php" method="post">
+                            <button class="btn-flat-logo2">スポットの履歴</button>
                         </form>
                         <form action="top_page.php" method="post">
                             <button class="btn-flat-logo2">TOPにもどる</button>
