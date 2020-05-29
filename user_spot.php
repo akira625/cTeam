@@ -7,6 +7,7 @@ $message     = '';
 $errors     = [];     // エラーメッセージ
 $filename = '';
 $status = 0;
+$change_station = '';
 $tags_name = [
 '1' => 'かわいい',
 '2' => 'おいしい',
@@ -162,7 +163,6 @@ if(is_post() === TRUE && count($errors) === 0){
                 foreach($tags as $tag){
                     if(insert_tags($link, $tag, $spot_id) === TRUE){
                         $message = 'スポットを追加しました。';
-
                     }else{
                         $errors[] = '追加失敗.tag_spot_table';
                     }
@@ -186,7 +186,6 @@ if(is_post() === TRUE && count($errors) === 0){
     }
 }   
 
-$spots = select_spots($link);
 
 close_db_connect($link);
 
