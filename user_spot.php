@@ -127,7 +127,6 @@ if($sql_kind === 'insert'){
 
 if($sql_kind === 'change_station'){
     $change_station = get_post('change_station');
-    
 }
 
 // コネクション取得
@@ -176,6 +175,7 @@ if(is_post() === TRUE && count($errors) === 0){
         }
         
     }
+    close_transaction($link, $errors);
     
     if($sql_kind === 'change_station'){
         if($change_station === 'all'){
@@ -184,8 +184,6 @@ if(is_post() === TRUE && count($errors) === 0){
             $spots = select_spots_whereStation($link, $change_station);
         }
     }
-    
-    close_transaction($link, $errors);
 }   
 
 
